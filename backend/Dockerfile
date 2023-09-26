@@ -22,9 +22,3 @@ RUN poetry config virtualenvs.create false
 RUN poetry install --no-interaction --no-root
 
 COPY . .
-
-# RUN chmod a+x scripts/*.sh
-
-EXPOSE 8000
-
-CMD ["uvicorn", "app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
