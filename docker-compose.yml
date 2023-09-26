@@ -1,6 +1,37 @@
 version: "3.8"
 services:
 
+  db:
+    image: postgres
+    container_name: pgdb
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - ./backend/.env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 80s
+    volumes:
+      - clisto-pgdb-data:/var/lib/postgresql/data
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "5050:80"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - clisto-pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      db:
+        condition: service_healthy
+
   backend:
     build:
       context: ./backend
@@ -14,4 +45,12 @@ services:
     volumes:
       - ./backend/app:/backend/app
       - ./backend/tests:/backend/tests
+    links:
+      - db
+    depends_on:
+      db:
+        condition: service_healthy
 
+volumes:
+  clisto-pgadmin-data:
+  clisto-pgdb-data:
