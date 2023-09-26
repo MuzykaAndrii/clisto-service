@@ -45,6 +45,7 @@ services:
     volumes:
       - ./backend/app:/backend/app
       - ./backend/tests:/backend/tests
+      - ./backend/migrations:/backend/migrations
     links:
       - db
     depends_on:
