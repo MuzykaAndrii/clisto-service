@@ -3,7 +3,10 @@ from typing import (
     Mapping,
 )
 
-from sqlalchemy import delete
+from sqlalchemy import (
+    delete,
+    select,
+)
 from sqlalchemy.exc import NoResultFound
 
 from app.db.session import async_session_maker
@@ -39,3 +42,11 @@ class BaseDAL:
 
             deleted_instance = await session.execute(stmt)
             return deleted_instance.scalar_one()
+
+    @classmethod
+    async def get_all(cls, offset: int = 0, limit: int = 50):
+        async with async_session_maker() as session:
+            stmt = select(cls.model).offset(offset).limit(limit)
+
+            instances = await session.execute(stmt)
+            return instances.scalars()
