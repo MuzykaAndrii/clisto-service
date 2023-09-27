@@ -17,6 +17,9 @@ class Category(Base):
 
     subcategories = relationship("Subcategory", back_populates="category")
 
+    def __str__(self) -> str:
+        return f"Category: {self.name}"
+
 
 class Subcategory(Base):
     __tablename__ = "maintenance_subcategories"
@@ -28,6 +31,9 @@ class Subcategory(Base):
     category = relationship("Category", back_populates="subcategories")
     service_options = relationship("ServiceOption", back_populates="subcategory")
 
+    def __str__(self) -> str:
+        return f"Subcategory: {self.name}"
+
 
 class ServiceOption(Base):
     __tablename__ = "maintenance_services"
@@ -38,3 +44,6 @@ class ServiceOption(Base):
     # TODO: add field to store icon
 
     subcategory = relationship(Subcategory, back_populates="service_options")
+
+    def __str__(self) -> str:
+        return f"Service option: {self.name}"

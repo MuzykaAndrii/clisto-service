@@ -35,4 +35,6 @@ async def pong():
 async def some():
     categories = await CategoryDAL.get_all()
 
+    print(categories)
+
     return categories
