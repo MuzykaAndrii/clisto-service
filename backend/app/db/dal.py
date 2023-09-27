@@ -31,7 +31,7 @@ class BaseDAL:
             await session.refresh(instance)
 
             return instance
-    
+
     @classmethod
     async def delete_by_id(cls, id: int) -> Any | NoResultFound:
         async with async_session_maker() as session:
@@ -39,4 +39,3 @@ class BaseDAL:
 
             deleted_instance = await session.execute(stmt)
             return deleted_instance.scalar_one()
-

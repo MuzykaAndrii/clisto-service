@@ -9,7 +9,6 @@ from sqlalchemy.orm import sessionmaker
 
 from app.config import settings
 
-
 if settings.MODE == "TEST":
     engine = create_async_engine(settings.test_database_url, poolclass=NullPool)
 else:

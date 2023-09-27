@@ -1,5 +1,9 @@
 from app.db.dal import BaseDAL
-from backend.app.modules.auto_maintenance.models import Category, ServiceOption, Subcategory
+from backend.app.modules.auto_maintenance.models import (
+    Category,
+    ServiceOption,
+    Subcategory,
+)
 
 
 class CategoryDAL(BaseDAL):
