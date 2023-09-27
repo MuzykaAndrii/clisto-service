@@ -1,5 +1,5 @@
 from app.db.dal import BaseDAL
-from backend.app.modules.auto_maintenance.models import (
+from app.modules.auto_maintenance.models import (
     Category,
     ServiceOption,
     Subcategory,

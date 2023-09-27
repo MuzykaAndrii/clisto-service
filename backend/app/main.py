@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
+from app.modules.auto_maintenance.dal import CategoryDAL
+from app.modules.auto_maintenance.schemas import CategorySchema
 
 app = FastAPI(
     title="Clisto service",
@@ -24,6 +26,13 @@ app.add_middleware(
 )
 
 
-@app.get("/ping/")
+@app.get("/ping")
 async def pong():
     return {"response": "pong"}
+
+
+@app.get("/test")
+async def some():
+    categories = await CategoryDAL.get_all()
+
+    return categories

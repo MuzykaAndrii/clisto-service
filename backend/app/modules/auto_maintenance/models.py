@@ -26,7 +26,7 @@ class Subcategory(Base):
     category_id = Column(ForeignKey("maintenance_categories.id"), nullable=False)
 
     category = relationship("Category", back_populates="subcategories")
-    service_options = relationship("ServiceOptions", back_populates="subcategory")
+    service_options = relationship("ServiceOption", back_populates="subcategory")
 
 
 class ServiceOption(Base):
@@ -37,4 +37,4 @@ class ServiceOption(Base):
     subcategory_id = Column(ForeignKey("maintenance_subcategories.id"), nullable=False)
     # TODO: add field to store icon
 
-    subcategory = relationship("Subcategory", back_populates="service_options")
+    subcategory = relationship(Subcategory, back_populates="service_options")
