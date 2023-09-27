@@ -13,6 +13,7 @@ from app.modules.auto_maintenance.models import (
     Subcategory,
     ServiceOption,
 )
+from app.modules.users.models import User
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
