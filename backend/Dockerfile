@@ -22,3 +22,5 @@ RUN poetry config virtualenvs.create false
 RUN poetry install --no-interaction --no-root
 
 COPY . .
+
+RUN chmod a+x ./scripts/*.sh
