@@ -15,10 +15,15 @@ class Category(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(length=50), nullable=False)
 
-    subcategories = relationship("Subcategory", back_populates="category")
+    subcategories = relationship(
+        "Subcategory", back_populates="category", cascade="all, delete-orphan"
+    )
 
     def __str__(self) -> str:
         return f"Category: {self.name}"
+
+    def __repr__(self) -> str:
+        return str(self)
 
 
 class Subcategory(Base):
@@ -34,6 +39,9 @@ class Subcategory(Base):
     def __str__(self) -> str:
         return f"Subcategory: {self.name}"
 
+    def __repr__(self) -> str:
+        return str(self)
+
 
 class ServiceOption(Base):
     __tablename__ = "maintenance_services"
@@ -47,3 +55,6 @@ class ServiceOption(Base):
 
     def __str__(self) -> str:
         return f"Service option: {self.name}"
+
+    def __repr__(self) -> str:
+        return str(self)

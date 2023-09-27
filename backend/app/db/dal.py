@@ -49,4 +49,4 @@ class BaseDAL:
             stmt = select(cls.model).offset(offset).limit(limit)
 
             instances = await session.execute(stmt)
-            return instances.all()
+            return instances.scalars().all()

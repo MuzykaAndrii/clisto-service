@@ -35,6 +35,7 @@ async def pong():
 async def some():
     categories = await CategoryDAL.get_all()
 
-    print(categories)
+    # for c in categories:
+    #     print(dir(c.subcategories))
 
-    return categories
+    return {"status": "ok"}
