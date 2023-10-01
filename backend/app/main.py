@@ -1,8 +1,17 @@
+from typing import Iterable
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import select
+from sqlalchemy.orm import selectinload
 
 from app.config import settings
+from app.db.session import async_session_maker
 from app.modules.auto_maintenance.dal import CategoryDAL
+from app.modules.auto_maintenance.models import (
+    Category,
+    Subcategory,
+)
 from app.modules.auto_maintenance.schemas import CategorySchema
 
 app = FastAPI(
@@ -31,11 +40,20 @@ async def pong():
     return {"response": "pong"}
 
 
-@app.get("/test")
-async def some():
-    categories = await CategoryDAL.get_all()
+@app.get("/test", response_model=list[CategorySchema])
+async def some(offset: int = 0, limit: int = 10):
+    async with async_session_maker() as session:
+        stmt = (
+            select(Category)
+            .options(
+                selectinload(Category.subcategories).selectinload(
+                    Subcategory.service_options
+                )
+            )
+            .offset(offset)
+            .limit(limit)
+        )
 
-    # for c in categories:
-    #     print(dir(c.subcategories))
+        result: Iterable[Category] = await session.scalars(stmt)
 
-    return {"status": "ok"}
+    return result
