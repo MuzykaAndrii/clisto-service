@@ -1,15 +1,8 @@
-from typing import Iterable
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
-from app.modules.auto_maintenance.dal import CategoryDAL
-from app.modules.auto_maintenance.models import (
-    Category,
-    Subcategory,
-)
-from app.modules.auto_maintenance.schemas import CategorySchema
+from app.modules.auto_maintenance.routes import router as maintenance_router
 
 app = FastAPI(
     title="Clisto service",
@@ -32,13 +25,4 @@ app.add_middleware(
 )
 
 
-@app.get("/ping")
-async def pong():
-    return {"response": "pong"}
-
-
-@app.get("/categories", response_model=list[CategorySchema], status_code=200)
-async def get_categories():
-    categories: Iterable[Category] = await CategoryDAL.get_all_with_related()
-
-    return categories
+app.include_router(maintenance_router)
