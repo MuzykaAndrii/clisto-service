@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from starlette_admin import DropDown
 from starlette_admin.contrib.sqla import Admin
+from starlette_admin.views import Link
 
 from app.config import (
     BASE_DIR,
@@ -45,9 +47,14 @@ admin = Admin(
     # middlewares=[Middleware(SessionMiddleware, secret_key=settings.JWT_SECRET)],
 )
 
-admin.add_view(CategoryAdminView())
-admin.add_view(SubCategoryAdminView())
-admin.add_view(ServiceOptionAdminView())
+admin.add_view(Link(label="Home Page", icon="fa-solid fa-house", url="/pages/main"))
+admin.add_view(
+    DropDown(
+        "Maintenance",
+        icon="fa-solid fa-wrench",
+        views=[CategoryAdminView(), SubCategoryAdminView(), ServiceOptionAdminView()],
+    )
+)
 
 admin.mount_to(app)
 
