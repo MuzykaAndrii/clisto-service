@@ -1,11 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from starlette_admin.contrib.sqla import Admin
 
 from app.config import (
     BASE_DIR,
     settings,
 )
+from app.db.session import engine
 from app.modules.auto_maintenance.routes import router as maintenance_router
 from app.modules.pages.routes import router as pages_router
 
@@ -28,6 +30,18 @@ app.add_middleware(
         "Authorization",
     ],
 )
+
+
+admin = Admin(
+    engine=engine,
+    title="Admin panel",
+    debug=settings.DEBUG,
+    # auth_provider=AdminAuthProvider(),
+    # middlewares=[Middleware(SessionMiddleware, secret_key=settings.JWT_SECRET)],
+)
+
+admin.mount_to(app)
+
 
 app.mount("/static", StaticFiles(directory=BASE_DIR / "app/static"), name="static")
 
