@@ -11,6 +11,7 @@ fastapi = {extras = ["all"], version = "^0.103.1"}
 SQLAlchemy = "^2.0.21"
 asyncpg = "^0.28.0"
 starlette-admin = "^0.11.2"
+passlib = "^1.7.4"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
