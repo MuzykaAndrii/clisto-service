@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.modules.auto_maintenance.routes import router as maintenance_router
+from app.modules.pages.router import router as pages_router
 
 app = FastAPI(
     title="Clisto service",
@@ -26,3 +27,4 @@ app.add_middleware(
 
 
 app.include_router(maintenance_router)
+app.include_router(pages_router)
