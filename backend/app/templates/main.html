@@ -106,274 +106,47 @@
               </div>
             </li>
 
-            <!-- body shop -->
+            <!-- categories -->
+
+            {% for cat in categories %}
             <li class="l-section section">
               <div class="work">
-                <h2 class="category-heading">Body SHOP</h2>
+                <h2 class="category-heading">{{ cat.name }}</h2>
                 <div class="work--lockup">
 
-                  <div class="body-shop category">
+                  <div class="{{ cat.name|join(' ') }} category">
 
                     <div class="subcats">
-                        <button data="painting" class="cat-btn cat-btn-active">Painting</button>
-                        <button data="repair" class="cat-btn">Repair</button>
+
+                        {% for subcat in cat.subcategories %}
+                          <button data="{{ subcat.name }}" class="cat-btn {% if loop.index == 1 %}cat-btn-active{% endif %}">{{ subcat.name }}</button>
+                        {% endfor %}
+
                     </div>
 
-                    <div class="subcat-items painting" style="display: flex;">
-
+                    {% for subcat in cat.subcategories %}
+                      
+                    <div class="subcat-items {{ subcat.name }}" {% if loop.index == 1 %}style="display: flex;"{% endif %}>
+                      
+                      {% for service_option in subcat.service_options %}
                       <div class="subcat-item">
                         <div class="subcat-icon-container">
                           <i class="fa-solid fa-brush fa-xl"></i>
                         </div>
-                        <span class="subcat-header">Full painting</span>
+                        <span class="subcat-header">{{ service_option.name }}</span>
                       </div>
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-brush fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">New part painting</span>
-                      </div>
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-brush fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Used part painting</span>
-                      </div>
+                      {% endfor %}
 
                     </div>
 
-                    <div class="subcat-items repair">
-
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-hammer fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Parts puttingty</span>
-                      </div>
-
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-hammer fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Plastic parts soldering</span>
-                      </div>
-
-                    </div>
+                    {% endfor %}
 
                   </div>
 
                 </div>
               </div>
             </li>
-
-            <!-- detailing -->
-            <li class="l-section section">
-              <div class="work">
-                <h2 class="category-heading">Car Detailing</h2>
-                <div class="work--lockup">
-
-                  <div class="detailing category">
-                    <div class="subcats">
-                        <button data="interior" class="cat-btn cat-btn-active">Interior</button>
-                        <button data="exterior" class="cat-btn">Exterior</button>
-                        <button data="window-toning" class="cat-btn">Window Toning</button>
-                        <button data="protective-film" class="cat-btn">Protective Film</button>
-                        <button data="polishing" class="cat-btn">Polishing</button>
-                        <button data="nano-coating" class="cat-btn">Nano Coating</button>
-                    </div>
-                    <div class="subcat-items interior" style="display: flex;">
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-couch fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Leather Seats Cleaning</span>
-                      </div>
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-couch fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Fabric Seat Cleaning</span>
-                      </div>
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-spray-can fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Carpet Cleaning</span>
-                      </div>
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-steering-wheel fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Front panel cleaning</span>
-                      </div>
-                        <div class="subcat-item">
-                          <div class="subcat-icon-container">
-                            <i class="fa-solid fa-couch fa-xl"></i>
-                          </div>
-                          <span class="subcat-header">Leather Seats Cleaning</span>
-                        </div>
-                        <div class="subcat-item">
-                          <div class="subcat-icon-container">
-                            <i class="fa-solid fa-couch fa-xl"></i>
-                          </div>
-                          <span class="subcat-header">Fabric Seat Cleaning</span>
-                        </div>
-                        <div class="subcat-item">
-                          <div class="subcat-icon-container">
-                            <i class="fa-solid fa-spray-can fa-xl"></i>
-                          </div>
-                          <span class="subcat-header">Carpet Cleaning</span>
-                        </div>
-                        <div class="subcat-item">
-                          <div class="subcat-icon-container">
-                            <i class="fa-solid fa-broom fa-xl"></i>
-                          </div>
-                          <span class="subcat-header">Dry Cleaning of Wheel Arches</span>
-                        </div>
-                        <div class="subcat-item">
-                          <div class="subcat-icon-container">
-                            <i class="fa-solid fa-broom fa-xl"></i>
-                          </div>
-                          <span class="subcat-header">Dry Cleaning of Luggage Compartment Ceiling</span>
-                        </div>
-                        <div class="subcat-item">
-                          <div class="subcat-icon-container">
-                            <i class="fa-solid fa-broom fa-xl"></i>
-                          </div>
-                          <span class="subcat-header">General Interior Cleaning</span>
-                        </div>
-                        <div class="subcat-item">
-                          <div class="subcat-icon-container">
-                            <i class="fa-solid fa-broom fa-xl"></i>
-                          </div>
-                          <span class="subcat-header">General Interior Cleaning of Dirty Car</span>
-                        </div>
-                        <div class="subcat-item">
-                          <div class="subcat-icon-container">
-                            <i class="fa-solid fa-broom fa-xl"></i>
-                          </div>
-                          <span class="subcat-header">All Window Cleaning</span>
-                        </div>
-                        <div class="subcat-item">
-                          <div class="subcat-icon-container">
-                            <i class="fa-solid fa-broom fa-xl"></i>
-                          </div>
-                          <span class="subcat-header">Doorway Cleaning</span>
-                        </div>
-                        <!-- Add more interior subcategory items here -->
-
-                    </div>
-                    <div class="subcat-items exterior">
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-spray-can fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Two Step Washing</span>
-                      </div>
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-ban fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Removing of Iron Sand Damage</span>
-                      </div>
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-ban fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Removing of Bitumen Damage</span>
-                      </div>
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-broom fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Dry Cleaning of Wheel Arches</span>
-                      </div>
-                      <!-- Add more exterior subcategory items here -->
-                    </div>
-                    <div class="subcat-items window-toning">
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-tint fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Tinting Sunroof</span>
-                      </div>
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-tint fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Tinting Windshield</span>
-                      </div>
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-tint fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Tinting Front Windows</span>
-                      </div>
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-tint fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Tinting Rear Windows</span>
-                      </div>
-                      <!-- Add more window toning subcategory items here -->
-                    </div>
-                    <div class="subcat-items protective-film">
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-shield-check fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Protection Film for One Element</span>
-                      </div>
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-shield-check fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Protection Film for Front Part</span>
-                      </div>
-                      <!-- Add more protective film subcategory items here -->
-                    </div>
-                    <div class="subcat-items polishing">
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-tools fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Polishing One Element</span>
-                      </div>
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-tools fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Polishing Entire Car</span>
-                      </div>
-                      <!-- Add more polishing subcategory items here -->
-                    </div>
-                    <div class="subcat-items nano-coating">
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-flask fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Hard Wax Coating</span>
-                      </div>
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-flask fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Ceramic Coating</span>
-                      </div>
-                      <div class="subcat-item">
-                        <div class="subcat-icon-container">
-                          <i class="fa-solid fa-flask fa-xl"></i>
-                        </div>
-                        <span class="subcat-header">Rain-Repellent Coating</span>
-                      </div>
-                      <!-- Add more nano coating subcategory items here -->
-                    </div>
-                  </div>
-
-
-                </div>
-              </div>
-            </li>
+            {% endfor %}
 
             <!-- about -->
             <li class="l-section section">

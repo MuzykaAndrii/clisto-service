@@ -25,6 +25,6 @@ async def get_main_page(
         name="main.html",
         context={
             "request": request,
-            "categories": categories,
+            "categories": categories.all(),
         },
     )
