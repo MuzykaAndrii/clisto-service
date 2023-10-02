@@ -9,7 +9,7 @@ from jose import (
 )
 
 from app.config import settings
-from app.modules.users.exceptions import (
+from app.jwt.exceptions import (
     JWTExpiredError,
     JwtNotValidError,
 )

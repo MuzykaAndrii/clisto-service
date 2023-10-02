@@ -12,11 +12,3 @@ class UserNotFoundError(UserLoginError):
 
 class UserInvalidPassword(UserLoginError):
     pass
-
-
-class JwtNotValidError(Exception):
-    pass
-
-
-class JWTExpiredError(Exception):
-    pass
