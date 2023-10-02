@@ -8,6 +8,11 @@ from app.config import (
     settings,
 )
 from app.db.session import engine
+from app.modules.auto_maintenance.admin.views import (
+    CategoryAdminView,
+    ServiceOptionAdminView,
+    SubCategoryAdminView,
+)
 from app.modules.auto_maintenance.routes import router as maintenance_router
 from app.modules.pages.routes import router as pages_router
 
@@ -39,6 +44,10 @@ admin = Admin(
     # auth_provider=AdminAuthProvider(),
     # middlewares=[Middleware(SessionMiddleware, secret_key=settings.JWT_SECRET)],
 )
+
+admin.add_view(CategoryAdminView())
+admin.add_view(SubCategoryAdminView())
+admin.add_view(ServiceOptionAdminView())
 
 admin.mount_to(app)
 
