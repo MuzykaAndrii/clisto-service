@@ -61,11 +61,13 @@ class AdminAuthProvider(AuthProvider):
         if not token:
             return False
 
+        # TODO: move this to separate module (service or dependency)
         try:
-            user_id: int = JwtService.read_token(token)
+            payload: dict = JwtService.read_token(token)
         except (JwtNotValidError, JWTExpiredError):
             return False
 
+        user_id = int(payload.get("sub"))
         current_user: User = await UserDAL.get_by_id(user_id)
         if not current_user or not current_user.is_superuser:
             return False
