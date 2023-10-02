@@ -1,11 +1,475 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First template</title>
+  <title>Clisto Company</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="HTML5 website template">
+  <meta name="keywords" content="global, template, html, sass, jquery">
+  <meta name="author" content="Bucky Maler">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/fontawesome/css/all.min.css">
 </head>
+
 <body>
-    <h1>Hello, world!</h1>
+
+  <!-- notification for small viewports and landscape oriented smartphones -->
+  <div class="device-notification">
+    <a class="device-notification--logo" href="#0">
+      <img class="nav-logo" src="assets/img/logo.png" alt="Global">
+      <p>Clisto Company</p>
+    </a>
+    <p class="device-notification--message">Global has so much to offer that we must request you orient your device to
+      portrait or find a larger screen. You won't be disappointed.</p>
+  </div>
+
+  <div class="perspective effect-rotate-left">
+    <div class="container">
+      <div class="outer-nav--return"></div>
+      <div id="viewport" class="l-viewport">
+        <div class="l-wrapper">
+          <header class="header">
+            <a class="header--logo" href="#0">
+              <img class="nav-logo" src="assets/img/logo.png" alt="Global">
+              <p></p>
+            </a>
+            <button class="header--cta cta">Make Appointment</button>
+            <div class="header-right">
+              <div class="socials">
+                <div class="social-item">
+                  <a class="facebook" target="_blank" href="https://www.facebook.com/clistocardetailing"><i class="fa-brands fa-facebook fa-lg"></i></a>
+                </div>
+                <div class="social-item">
+                  <a href="https://www.instagram.com/clisto.company/" target="_blank" class="instagram"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                </div>
+                <div class="social-item">
+                  <a href="" class="youtube"><i class="fa-brands fa-youtube fa-lg"></i></a>
+                </div>
+                <div class="social-item">
+                  <a href="mailto:clisto.company@gmail.com" target="_blank" class="email"><i class="fa-regular fa-envelope fa-lg"></i></a>
+                </div>
+              </div>
+
+              <div class="header--nav-toggle">
+                <span></span>
+              </div>
+            </div>
+          </header>
+          <nav class="l-side-nav">
+            <ul class="side-nav">
+              <li class="is-active"><span>Home</span></li>
+              <li><span>Body shop</span></li>
+              <li><span>Detailing</span></li>
+              <li><span>About</span></li>
+              <li><span>Contact</span></li>
+              <li><span>Appointment</span></li>
+            </ul>
+          </nav>
+          <ul class="l-main-content main-content">
+            <!-- main -->
+            <li class="l-section section section--is-active">
+              <div class="intro">
+                <div class="intro--banner">
+                  <h1>Repair / detail <br> youre car cheaper <br> and handy</h1>
+                  <button class="cta">Make Appointment
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118"
+                      style="enable-background:new 0 0 150 118;" xml:space="preserve">
+                      <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
+                        <path
+                          d="M870,1167c-34-17-55-57-46-90c3-15,81-100,194-211l187-185l-565-1c-431,0-571-3-590-13c-55-28-64-94-18-137c21-20,33-20,597-20h575l-192-193C800,103,794,94,849,39c20-20,39-29,61-29c28,0,63,30,298,262c147,144,272,271,279,282c30,51,23,60-219,304C947,1180,926,1196,870,1167z" />
+                      </g>
+                    </svg>
+                    <span class="btn-background"></span>
+                  </button>
+                  <img src="assets/img/introduction-visual.png" alt="Welcome" width="400" height="300">
+                </div>
+                <div class="intro--options">
+                  <a href="#0">
+                    <h3>High-quality repairment</h3>
+                    <p>Experience of our crew allows to fix almost all cases of car issues</p>
+                  </a>
+                  <a href="#0">
+                    <h3>Fantasy detailing</h3>
+                    <p>More of 30 kinds of detailing interior / exterior including washing and cleaning.</p>
+                  </a>
+                  <a href="#0">
+                    <h3>Fast and affordable</h3>
+                    <p>Quick and convenient service with incredible results simultaneously.</p>
+                  </a>
+                </div>
+              </div>
+            </li>
+
+            <!-- body shop -->
+            <li class="l-section section">
+              <div class="work">
+                <h2 class="category-heading">Body SHOP</h2>
+                <div class="work--lockup">
+
+                  <div class="body-shop category">
+
+                    <div class="subcats">
+                        <button data="painting" class="cat-btn cat-btn-active">Painting</button>
+                        <button data="repair" class="cat-btn">Repair</button>
+                    </div>
+
+                    <div class="subcat-items painting" style="display: flex;">
+
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-brush fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Full painting</span>
+                      </div>
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-brush fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">New part painting</span>
+                      </div>
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-brush fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Used part painting</span>
+                      </div>
+
+                    </div>
+
+                    <div class="subcat-items repair">
+
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-hammer fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Parts puttingty</span>
+                      </div>
+
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-hammer fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Plastic parts soldering</span>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </li>
+
+            <!-- detailing -->
+            <li class="l-section section">
+              <div class="work">
+                <h2 class="category-heading">Car Detailing</h2>
+                <div class="work--lockup">
+
+                  <div class="detailing category">
+                    <div class="subcats">
+                        <button data="interior" class="cat-btn cat-btn-active">Interior</button>
+                        <button data="exterior" class="cat-btn">Exterior</button>
+                        <button data="window-toning" class="cat-btn">Window Toning</button>
+                        <button data="protective-film" class="cat-btn">Protective Film</button>
+                        <button data="polishing" class="cat-btn">Polishing</button>
+                        <button data="nano-coating" class="cat-btn">Nano Coating</button>
+                    </div>
+                    <div class="subcat-items interior" style="display: flex;">
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-couch fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Leather Seats Cleaning</span>
+                      </div>
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-couch fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Fabric Seat Cleaning</span>
+                      </div>
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-spray-can fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Carpet Cleaning</span>
+                      </div>
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-steering-wheel fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Front panel cleaning</span>
+                      </div>
+                        <div class="subcat-item">
+                          <div class="subcat-icon-container">
+                            <i class="fa-solid fa-couch fa-xl"></i>
+                          </div>
+                          <span class="subcat-header">Leather Seats Cleaning</span>
+                        </div>
+                        <div class="subcat-item">
+                          <div class="subcat-icon-container">
+                            <i class="fa-solid fa-couch fa-xl"></i>
+                          </div>
+                          <span class="subcat-header">Fabric Seat Cleaning</span>
+                        </div>
+                        <div class="subcat-item">
+                          <div class="subcat-icon-container">
+                            <i class="fa-solid fa-spray-can fa-xl"></i>
+                          </div>
+                          <span class="subcat-header">Carpet Cleaning</span>
+                        </div>
+                        <div class="subcat-item">
+                          <div class="subcat-icon-container">
+                            <i class="fa-solid fa-broom fa-xl"></i>
+                          </div>
+                          <span class="subcat-header">Dry Cleaning of Wheel Arches</span>
+                        </div>
+                        <div class="subcat-item">
+                          <div class="subcat-icon-container">
+                            <i class="fa-solid fa-broom fa-xl"></i>
+                          </div>
+                          <span class="subcat-header">Dry Cleaning of Luggage Compartment Ceiling</span>
+                        </div>
+                        <div class="subcat-item">
+                          <div class="subcat-icon-container">
+                            <i class="fa-solid fa-broom fa-xl"></i>
+                          </div>
+                          <span class="subcat-header">General Interior Cleaning</span>
+                        </div>
+                        <div class="subcat-item">
+                          <div class="subcat-icon-container">
+                            <i class="fa-solid fa-broom fa-xl"></i>
+                          </div>
+                          <span class="subcat-header">General Interior Cleaning of Dirty Car</span>
+                        </div>
+                        <div class="subcat-item">
+                          <div class="subcat-icon-container">
+                            <i class="fa-solid fa-broom fa-xl"></i>
+                          </div>
+                          <span class="subcat-header">All Window Cleaning</span>
+                        </div>
+                        <div class="subcat-item">
+                          <div class="subcat-icon-container">
+                            <i class="fa-solid fa-broom fa-xl"></i>
+                          </div>
+                          <span class="subcat-header">Doorway Cleaning</span>
+                        </div>
+                        <!-- Add more interior subcategory items here -->
+
+                    </div>
+                    <div class="subcat-items exterior">
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-spray-can fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Two Step Washing</span>
+                      </div>
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-ban fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Removing of Iron Sand Damage</span>
+                      </div>
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-ban fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Removing of Bitumen Damage</span>
+                      </div>
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-broom fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Dry Cleaning of Wheel Arches</span>
+                      </div>
+                      <!-- Add more exterior subcategory items here -->
+                    </div>
+                    <div class="subcat-items window-toning">
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-tint fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Tinting Sunroof</span>
+                      </div>
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-tint fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Tinting Windshield</span>
+                      </div>
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-tint fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Tinting Front Windows</span>
+                      </div>
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-tint fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Tinting Rear Windows</span>
+                      </div>
+                      <!-- Add more window toning subcategory items here -->
+                    </div>
+                    <div class="subcat-items protective-film">
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-shield-check fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Protection Film for One Element</span>
+                      </div>
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-shield-check fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Protection Film for Front Part</span>
+                      </div>
+                      <!-- Add more protective film subcategory items here -->
+                    </div>
+                    <div class="subcat-items polishing">
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-tools fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Polishing One Element</span>
+                      </div>
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-tools fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Polishing Entire Car</span>
+                      </div>
+                      <!-- Add more polishing subcategory items here -->
+                    </div>
+                    <div class="subcat-items nano-coating">
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-flask fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Hard Wax Coating</span>
+                      </div>
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-flask fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Ceramic Coating</span>
+                      </div>
+                      <div class="subcat-item">
+                        <div class="subcat-icon-container">
+                          <i class="fa-solid fa-flask fa-xl"></i>
+                        </div>
+                        <span class="subcat-header">Rain-Repellent Coating</span>
+                      </div>
+                      <!-- Add more nano coating subcategory items here -->
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </li>
+
+            <!-- about -->
+            <li class="l-section section">
+              <div class="about">
+                <div class="about--banner">
+                  <h2>We<br>believe in<br>passionate<br>people</h2>
+                  <a href="#0">Career
+                    <span>
+                      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118"
+                        style="enable-background:new 0 0 150 118;" xml:space="preserve">
+                        <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
+                          <path
+                            d="M870,1167c-34-17-55-57-46-90c3-15,81-100,194-211l187-185l-565-1c-431,0-571-3-590-13c-55-28-64-94-18-137c21-20,33-20,597-20h575l-192-193C800,103,794,94,849,39c20-20,39-29,61-29c28,0,63,30,298,262c147,144,272,271,279,282c30,51,23,60-219,304C947,1180,926,1196,870,1167z" />
+                        </g>
+                      </svg>
+                    </span>
+                  </a>
+                  <img src="assets/img/about-visual.png" alt="About Us">
+                </div>
+                <div class="about--options">
+                  <a href="#0">
+                    <h3>Winners</h3>
+                  </a>
+                  <a href="#0">
+                    <h3>Philosophy</h3>
+                  </a>
+                  <a href="#0">
+                    <h3>History</h3>
+                  </a>
+                </div>
+              </div>
+            </li>
+
+            <!-- contact -->
+            <li class="l-section section">
+              <div class="contact">
+                <div class="contact--lockup">
+                  <div class="modal">
+                    <div class="modal--information">
+                      <p>510 Ruby Place NW <br> Canton OH</p>
+                      <a href="mailto:clisto.company@gmail.com">clisto.company@gmail.com</a>
+                      <a href="tel:+148126287560">+1 330 354 0177</a>
+                    </div>
+                    <ul class="modal--options">
+                      <li><a href="https://goo.gl/maps/SMp8YqeBaMiBHBsd9" target="_blank">Show in maps</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <!-- hire -->
+            <li class="l-section section">
+              <div class="hire">
+                <h2>You want us to do</h2>
+                <form class="work-request">
+                  <div class="work-request--information">
+                    <div class="information-name">
+                      <input id="name" type="text" spellcheck="false">
+                      <label for="name">Name</label>
+                    </div>
+                    <div class="information-email">
+                      <input id="email" type="email" spellcheck="false">
+                      <label for="email">Email</label>
+                    </div>
+                    <div class="information-phone">
+                      <input id="phone" type="phone" spellcheck="false">
+                      <label for="phone">Phone</label>
+                    </div>
+                    <div class="information-photos">
+                      <div>Car photos</div>
+                      <input id="photos" type="file" spellcheck="false" multiple>
+                      <!-- <label for="photos">Car photo</label> -->
+                    </div>
+                  </div>
+                  <input type="submit" value="Send Request">
+                </form>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <ul class="outer-nav">
+      <li class="is-active">Home</li>
+      <li>Body shop</li>
+      <li>Detailing</li>
+      <li>About</li>
+      <li>Contact</li>
+      <li>Make Appointment</li>
+    </ul>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
+  <script src="../assets/js/vendor/hammer-2.0.8.js"></script>
+  <script src="../assets/js/functions.js"></script>
+  <script src="../assets/js/categories-toggler.js"></script>
 </body>
+
 </html>
