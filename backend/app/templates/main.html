@@ -9,8 +9,8 @@
   <meta name="description" content="HTML5 website template">
   <meta name="keywords" content="global, template, html, sass, jquery">
   <meta name="author" content="Bucky Maler">
-  <link rel="stylesheet" href="../assets/css/main.css">
-  <link rel="stylesheet" href="../assets/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', path='css/main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='fontawesome/css/all.min.css') }}">
 </head>
 
 <body>
@@ -18,7 +18,7 @@
   <!-- notification for small viewports and landscape oriented smartphones -->
   <div class="device-notification">
     <a class="device-notification--logo" href="#0">
-      <img class="nav-logo" src="assets/img/logo.png" alt="Global">
+      <img class="nav-logo" src="{{ url_for('static', path='img/logo.png') }}" alt="Global">
       <p>Clisto Company</p>
     </a>
     <p class="device-notification--message">Global has so much to offer that we must request you orient your device to
@@ -32,7 +32,7 @@
         <div class="l-wrapper">
           <header class="header">
             <a class="header--logo" href="#0">
-              <img class="nav-logo" src="assets/img/logo.png" alt="Global">
+              <img class="nav-logo" src="{{ url_for('static', path='img/logo.png') }}" alt="Global">
               <p></p>
             </a>
             <button class="header--cta cta">Make Appointment</button>
@@ -84,7 +84,7 @@
                     </svg>
                     <span class="btn-background"></span>
                   </button>
-                  <img src="assets/img/introduction-visual.png" alt="Welcome" width="400" height="300">
+                  <img src="{{ url_for('static', path='img/introduction-visual.png') }}" alt="Welcome" width="400" height="300">
                 </div>
                 <div class="intro--options">
                   <a href="#0">
@@ -389,7 +389,7 @@
                       </svg>
                     </span>
                   </a>
-                  <img src="assets/img/about-visual.png" alt="About Us">
+                  <img src="{{ url_for('static', path='img/about-visual.png') }}" alt="About Us">
                 </div>
                 <div class="about--options">
                   <a href="#0">
@@ -467,9 +467,9 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
-  <script src="../assets/js/vendor/hammer-2.0.8.js"></script>
-  <script src="../assets/js/functions.js"></script>
-  <script src="../assets/js/categories-toggler.js"></script>
+  <script src="{{ url_for('static', path='js/vendor/hammer-2.0.8.js') }}"></script>
+  <script src="{{ url_for('static', path='js/functions.js') }}"></script>
+  <script src="{{ url_for('static', path='js/categories-toggler.js') }}"></script>
 </body>
 
 </html>
