@@ -10,7 +10,7 @@ from app.modules.auto_maintenance.models import (
 class CategoryAdminView(ModelView):
     def __init__(self, *args, **kwargs):
         model = Category
-        icon = None
+        icon = "fa-regular fa-folder"
         name = "Category"
         label = "Categories"
         identity = None
@@ -28,7 +28,7 @@ class CategoryAdminView(ModelView):
 class SubCategoryAdminView(ModelView):
     def __init__(self, *args, **kwargs):
         model = Subcategory
-        icon = None
+        icon = "fa-regular fa-folder-open"
         name = "Subcategory"
         label = "Subcategories"
         identity = None
@@ -47,7 +47,7 @@ class SubCategoryAdminView(ModelView):
 class ServiceOptionAdminView(ModelView):
     def __init__(self, *args, **kwargs):
         model = ServiceOption
-        icon = None
+        icon = "fa-solid fa-wrench"
         name = "Service"
         label = "Services"
         identity = None

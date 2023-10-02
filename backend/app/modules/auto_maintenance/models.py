@@ -1,3 +1,4 @@
+from fastapi import Request
 from sqlalchemy import (
     Column,
     ForeignKey,
@@ -25,6 +26,9 @@ class Category(Base):
     def __repr__(self) -> str:
         return str(self)
 
+    def __admin_repr__(self, request: Request) -> str:
+        return str(self)
+
 
 class Subcategory(Base):
     __tablename__ = "maintenance_subcategories"
@@ -40,6 +44,9 @@ class Subcategory(Base):
         return f"Subcategory: {self.name}"
 
     def __repr__(self) -> str:
+        return str(self)
+
+    def __admin_repr__(self, request: Request) -> str:
         return str(self)
 
 
@@ -58,3 +65,6 @@ class ServiceOption(Base):
 
     def __repr__(self) -> str:
         return str(self)
+
+    def __admin_repr__(self, request: Request) -> str:
+        return f"Service: {self.name}"
