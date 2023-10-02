@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware import Middleware
 from fastapi.middleware.cors import CORSMiddleware
@@ -20,10 +22,25 @@ from app.modules.auto_maintenance.admin.views import (
 )
 from app.modules.auto_maintenance.routes import router as maintenance_router
 from app.modules.pages.routes import router as pages_router
+from app.modules.users.dal import UserDAL
+from app.modules.users.services.user import UserService
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # on startup
+    admin_users = await UserDAL.get_admin_users()
+    if not admin_users:
+        await UserService.create_base_admin_user()
+
+    yield
+    # on shutdown
+
 
 app = FastAPI(
     title="Clisto service",
     debug=settings.DEBUG,
+    lifespan=lifespan,
 )
 
 

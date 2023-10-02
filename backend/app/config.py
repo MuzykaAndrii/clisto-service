@@ -45,6 +45,10 @@ class Settings(BaseSettings):
     JWT_SECRET: str
     JWT_EXPIRE_MINUTES: int
 
+    BASE_ADMIN_NAME: str
+    BASE_ADMIN_EMAIL: str
+    BASE_ADMIN_PASS: str
+
     @computed_field
     @property
     def database_url(self) -> str:
