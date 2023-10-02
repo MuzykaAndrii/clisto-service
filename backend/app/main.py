@@ -1,10 +1,13 @@
 from fastapi import FastAPI
+from fastapi.middleware import Middleware
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from starlette.middleware.sessions import SessionMiddleware
 from starlette_admin import DropDown
 from starlette_admin.contrib.sqla import Admin
 from starlette_admin.views import Link
 
+from app.admin.auth_provider import AdminAuthProvider
 from app.config import (
     BASE_DIR,
     settings,
@@ -43,8 +46,8 @@ admin = Admin(
     engine=engine,
     title="Admin panel",
     debug=settings.DEBUG,
-    # auth_provider=AdminAuthProvider(),
-    # middlewares=[Middleware(SessionMiddleware, secret_key=settings.JWT_SECRET)],
+    auth_provider=AdminAuthProvider(),
+    middlewares=[Middleware(SessionMiddleware, secret_key=settings.JWT_SECRET)],
 )
 
 admin.add_view(Link(label="Home Page", icon="fa-solid fa-house", url="/pages/main"))
