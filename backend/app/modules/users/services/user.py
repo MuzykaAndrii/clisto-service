@@ -23,8 +23,8 @@ class UserService:
             is_superuser=True,
         )
 
-    @classmethod
-    async def get_user_from_token(cls, token: str) -> User | None:
+    @staticmethod
+    async def get_user_from_token(token: str) -> User | None:
         try:
             payload: dict = JwtService.read_token(token)
         except JwtNotValidError:
@@ -43,6 +43,6 @@ class UserService:
 
         return user
 
-    @classmethod
-    def user_is_admin(cls, user: User) -> bool:
+    @staticmethod
+    def user_is_admin(user: User) -> bool:
         return user.is_superuser
