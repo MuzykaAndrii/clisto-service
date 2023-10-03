@@ -22,6 +22,7 @@ from app.modules.auto_maintenance.admin.views import (
 )
 from app.modules.auto_maintenance.routes import router as maintenance_router
 from app.modules.pages.routes import router as pages_router
+from app.modules.users.admin.views import UserAdminView
 from app.modules.users.dal import UserDAL
 from app.modules.users.services.user import UserService
 
@@ -75,6 +76,7 @@ admin.add_view(
         views=[CategoryAdminView(), SubCategoryAdminView(), ServiceOptionAdminView()],
     )
 )
+admin.add_view(UserAdminView())
 
 admin.mount_to(app)
 

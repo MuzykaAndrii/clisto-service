@@ -14,6 +14,7 @@ from starlette_admin.exceptions import (
 
 from app.jwt.exceptions import (
     JWTExpiredError,
+    JwtMissingError,
     JwtNotValidError,
 )
 from app.jwt.service import JwtService
@@ -63,6 +64,7 @@ class AdminAuthProvider(AuthProvider):
         try:
             current_user = await UserService.get_user_from_token(token)
         except (
+            JwtMissingError,
             JwtNotValidError,
             JWTExpiredError,
             InvalidUserIdError,
