@@ -61,7 +61,7 @@ class AdminAuthProvider(AuthProvider):
         token: str = request.session.get("admin_token")
 
         try:
-            current_user = UserService.get_user_from_token(token)
+            current_user = await UserService.get_user_from_token(token)
         except (
             JwtNotValidError,
             JWTExpiredError,
