@@ -1,3 +1,7 @@
+class JwtMissingError(Exception):
+    pass
+
+
 class JwtNotValidError(Exception):
     pass
 

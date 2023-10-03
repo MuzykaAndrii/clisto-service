@@ -11,6 +11,7 @@ from jose import (
 from app.config import settings
 from app.jwt.exceptions import (
     JWTExpiredError,
+    JwtMissingError,
     JwtNotValidError,
 )
 
@@ -56,6 +57,9 @@ class JwtService:
 
     @classmethod
     def read_token(cls, token: str) -> dict:
+        if not token:
+            raise JwtMissingError
+
         try:
             payload = jwt.decode(
                 token,
