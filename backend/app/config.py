@@ -45,6 +45,13 @@ class Settings(BaseSettings):
     JWT_SECRET: str
     JWT_EXPIRE_MINUTES: int
 
+    SMTP_HOST: str
+    SMTP_PORT: int
+    SMTP_USER: str
+    SMTP_PASSWORD: str
+
+    APPOINTMENTS_RECEIVERS: list[str]
+
     BASE_ADMIN_NAME: str
     BASE_ADMIN_EMAIL: str
     BASE_ADMIN_PASS: str
