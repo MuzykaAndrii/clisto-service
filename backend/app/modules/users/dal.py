@@ -32,8 +32,5 @@ class UserDAL(BaseDAL):
 
     @classmethod
     async def get_admin_users(cls) -> Iterable[User] | None:
-        async with async_session_maker() as session:
-            q = select(User).where(User.is_superuser == True)
-
-            admin_users: Iterable[User] = await session.scalars(q)
-            return admin_users.all()
+        admin_users = await cls.filter_by(is_superuser=True)
+        return admin_users

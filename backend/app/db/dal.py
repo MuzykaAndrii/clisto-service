@@ -1,5 +1,6 @@
 from typing import (
     Any,
+    Iterable,
     Mapping,
 )
 
@@ -44,9 +45,17 @@ class BaseDAL:
             return deleted_instance.scalar_one()
 
     @classmethod
-    async def get_all(cls, offset: int = 0, limit: int = 50):
+    async def get_all(cls, offset: int = 0, limit: int = 50) -> Iterable[Any] | None:
         async with async_session_maker() as session:
             stmt = select(cls.model).offset(offset).limit(limit)
 
             instances = await session.execute(stmt)
             return instances.scalars().all()
+
+    @classmethod
+    async def filter_by(cls, **filter_criteria) -> Iterable[Any] | None:
+        async with async_session_maker() as session:
+            stmt = select(cls.model).filter_by(**filter_criteria)
+
+            filter_result = await session.scalars(stmt)
+            return filter_result.all()
