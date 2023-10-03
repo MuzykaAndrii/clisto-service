@@ -1,5 +1,4 @@
 from fastapi import (
-    HTTPException,
     Request,
     Response,
 )
@@ -20,12 +19,14 @@ from app.jwt.exceptions import (
 from app.jwt.service import JwtService
 from app.modules.users.dal import UserDAL
 from app.modules.users.exceptions import (
+    InvalidUserIdError,
     UserInvalidPassword,
     UserNotFoundError,
 )
 from app.modules.users.models import User
 from app.modules.users.schemas import UserLogin
 from app.modules.users.services.auth import AuthService
+from app.modules.users.services.user import UserService
 
 
 class AdminAuthProvider(AuthProvider):
@@ -58,18 +59,18 @@ class AdminAuthProvider(AuthProvider):
 
     async def is_authenticated(self, request: Request) -> bool:
         token: str = request.session.get("admin_token")
-        if not token:
-            return False
 
-        # TODO: move this to separate module (service or dependency)
         try:
-            payload: dict = JwtService.read_token(token)
-        except (JwtNotValidError, JWTExpiredError):
+            current_user = UserService.get_user_from_token(token)
+        except (
+            JwtNotValidError,
+            JWTExpiredError,
+            InvalidUserIdError,
+            UserNotFoundError,
+        ):
             return False
 
-        user_id = int(payload.get("sub"))
-        current_user: User = await UserDAL.get_by_id(user_id)
-        if not current_user or not current_user.is_superuser:
+        if not UserService.user_is_admin(current_user):
             return False
 
         request.state.user = current_user

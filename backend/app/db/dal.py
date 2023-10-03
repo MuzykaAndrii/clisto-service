@@ -53,7 +53,7 @@ class BaseDAL:
             return instances.scalars().all()
 
     @classmethod
-    async def filter_by(cls, **filter_criteria) -> Iterable[Any] | None:
+    async def filter_by(cls, **filter_criteria: Mapping) -> Iterable[Any] | None:
         async with async_session_maker() as session:
             stmt = select(cls.model).filter_by(**filter_criteria)
 
