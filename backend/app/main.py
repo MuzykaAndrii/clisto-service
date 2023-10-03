@@ -30,9 +30,7 @@ from app.modules.users.services.user import UserService
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # on startup
-    admin_users = await UserDAL.get_admin_users()
-    if not admin_users:
-        await UserService.create_base_admin_user()
+    await UserService.ensure_admin_exists()
 
     yield
     # on shutdown

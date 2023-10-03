@@ -14,14 +14,24 @@ from app.modules.users.services.password import PWDService
 
 
 class UserService:
-    @staticmethod
-    async def create_base_admin_user() -> None:
+    @classmethod
+    async def _create_base_admin_user(cls) -> None:
         await UserDAL.create(
             username=settings.BASE_ADMIN_NAME,
             email=settings.BASE_ADMIN_EMAIL,
             password_hash=PWDService.get_password_hash(settings.BASE_ADMIN_PASS),
             is_superuser=True,
         )
+
+    @classmethod
+    async def ensure_admin_exists(cls) -> None:
+        """Ensures the existence of at least one admin user in the system.
+        If no admin users are found, creates a base admin user
+        """
+        admin_users = await UserDAL.get_admin_users()
+
+        if not admin_users:
+            await cls._create_base_admin_user()
 
     @staticmethod
     async def get_user_from_token(token: str) -> User | None:
