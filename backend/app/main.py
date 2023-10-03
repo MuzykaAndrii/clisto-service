@@ -1,6 +1,11 @@
 from contextlib import asynccontextmanager
+from typing import Annotated
 
-from fastapi import FastAPI
+from fastapi import (
+    FastAPI,
+    Form,
+    UploadFile,
+)
 from fastapi.middleware import Middleware
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -15,6 +20,7 @@ from app.config import (
     settings,
 )
 from app.db.session import engine
+from app.modules.appointments.routes import router as appointments_router
 from app.modules.auto_maintenance.admin.views import (
     CategoryAdminView,
     ServiceOptionAdminView,
@@ -23,7 +29,6 @@ from app.modules.auto_maintenance.admin.views import (
 from app.modules.auto_maintenance.routes import router as maintenance_router
 from app.modules.pages.routes import router as pages_router
 from app.modules.users.admin.views import UserAdminView
-from app.modules.users.dal import UserDAL
 from app.modules.users.services.user import UserService
 
 
@@ -84,3 +89,4 @@ app.mount("/static", StaticFiles(directory=BASE_DIR / "app/static"), name="stati
 
 app.include_router(maintenance_router)
 app.include_router(pages_router)
+app.include_router(appointments_router)
