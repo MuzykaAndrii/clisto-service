@@ -12,25 +12,26 @@ from starlette_admin.exceptions import (
     LoginFailed,
 )
 
+from app.config import settings
 from app.jwt.exceptions import (
     JWTExpiredError,
     JwtMissingError,
     JwtNotValidError,
 )
 from app.jwt.service import JwtService
-from app.modules.users.dal import UserDAL
 from app.modules.users.exceptions import (
     InvalidUserIdError,
     UserInvalidPassword,
     UserNotFoundError,
 )
-from app.modules.users.models import User
 from app.modules.users.schemas import UserLogin
 from app.modules.users.services.auth import AuthService
 from app.modules.users.services.user import UserService
 
 
 class AdminAuthProvider(AuthProvider):
+    token_name: str = settings.AUTH_TOKEN_NAME
+
     async def login(
         self,
         username: str,
@@ -55,11 +56,11 @@ class AdminAuthProvider(AuthProvider):
             raise LoginFailed("Invalid password")
 
         auth_token = JwtService.create_token(str(user.id))
-        request.session.update({"admin_token": auth_token})
+        request.session.update({self.token_name: auth_token})
         return response
 
     async def is_authenticated(self, request: Request) -> bool:
-        token: str = request.session.get("admin_token")
+        token: str = request.session.get(self.token_name)
 
         try:
             current_user = await UserService.get_user_from_token(token)
