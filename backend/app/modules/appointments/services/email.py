@@ -1,12 +1,11 @@
 from email.message import EmailMessage
 
 from fastapi import UploadFile
-from jinja2 import Environment
 
 from app.config import settings
 from app.emails.services.mail import EmailService
 from app.modules.appointments.models import Appointment
-from backend.app.template_engine.template_engine import TemplateEngine
+from app.template_engine.template_engine import TemplateEngine
 
 
 class AppointmentEmailService:
