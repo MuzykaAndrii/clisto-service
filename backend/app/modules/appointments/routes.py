@@ -14,7 +14,7 @@ from app.files.exceptions import (
     TooLargeFileError,
 )
 from app.modules.appointments.forms import AppointmentForm
-from app.modules.appointments.services.image import ImageService
+from app.modules.appointments.services.image import AppointmentImageService
 
 router = APIRouter(
     prefix="/appointments",
@@ -54,7 +54,7 @@ async def make_appointment(
     """
     try:
         for image in images:
-            ImageService(image).validate()
+            AppointmentImageService(image).validate()
     except TooLargeFileError:
         raise HTTPException(413, detail="Uploaded image should be smaller than 5mb")
     except InvalidMimeTypeError:
