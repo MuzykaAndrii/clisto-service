@@ -36,7 +36,7 @@ async def make_appointment(
         for image in images:
             AppointmentImageService(image).validate()
     except TooLargeFileError:
-        raise HTTPException(413, detail="Uploaded image should be smaller than 5mb")
+        raise HTTPException(413, detail="Uploaded image should be smaller than 10mb")
     except InvalidMimeTypeError:
         raise HTTPException(415, detail="Uploaded files should be images")
 
