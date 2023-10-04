@@ -41,7 +41,9 @@ async def make_appointment(
         raise HTTPException(415, detail="Uploaded files should be images")
 
     new_appointment: Appointment = await AppointmentDAL.create(
-        name=name, email=email, phone=phone
+        name=name,
+        email=email,
+        phone=phone,
     )
 
     client_letter = AppointmentEmailService.get_client_confirmation_letter(
