@@ -1,3 +1,4 @@
+import mimetypes
 from enum import Enum
 
 from fastapi import UploadFile
@@ -20,7 +21,6 @@ class MimeTypes(Enum):
 class FileService:
     max_file_size: int
     expected_file_type: MimeTypes
-    max_files_count: int
 
     def __init__(self, file: UploadFile) -> None:
         self.file = file
