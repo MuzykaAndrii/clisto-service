@@ -2,12 +2,19 @@ from typing import Annotated
 
 from fastapi import (
     APIRouter,
+    HTTPException,
     UploadFile,
 )
 
 from app.emails.services.mail import EmailService
 from app.emails.services.smtp import SMTPService
+from app.files.exceptions import (
+    FileValidationError,
+    InvalidMimeTypeError,
+    TooLargeFileError,
+)
 from app.modules.appointments.forms import AppointmentForm
+from app.modules.appointments.services.image import ImageService
 
 router = APIRouter(
     prefix="/appointments",
@@ -45,6 +52,14 @@ async def make_appointment(
             appointment.save
 
     """
+    try:
+        for image in images:
+            ImageService(image).validate()
+    except TooLargeFileError:
+        raise HTTPException(413, detail="Uploaded image should be smaller than 5mb")
+    except InvalidMimeTypeError:
+        raise HTTPException(415, detail="Uploaded files should be images")
+
     letter = await EmailService.create_letter_with_files(
         recipient=email,
         subject="Test email with files",
