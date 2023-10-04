@@ -1,5 +1,4 @@
 from email.message import EmailMessage
-from typing import Mapping
 
 from fastapi import UploadFile
 from jinja2 import Environment
@@ -7,30 +6,21 @@ from jinja2 import Environment
 from app.config import settings
 from app.emails.services.mail import EmailService
 from app.modules.appointments.models import Appointment
-from app.template_engine.services import TemplateEngineService
+from backend.app.template_engine.template_engine import TemplateEngine
 
 
 class AppointmentEmailService:
-    template_engine: Environment = TemplateEngineService.get_engine(
+    template_engine: TemplateEngine = TemplateEngine(
         "app/modules/appointments/letter_templates"
     )
-    client_confirmation_template: str = "client_confirmation.html"
-    notification_letter_template: str = "new_appointment_notification.html"
-
-    @classmethod
-    def _render_template(cls, template_name: str, **fields: Mapping):
-        body_template = cls.template_engine.get_template(template_name)
-
-        content = body_template.render(**fields)
-
-        return content
 
     @classmethod
     def get_client_confirmation_letter(
         cls, client_name: str, client_email: str
     ) -> EmailMessage:
-        letter_body = cls._render_template(
-            cls.client_confirmation_template, client_name=client_name
+        letter_body = cls.template_engine.render_template(
+            "client_confirmation.html",
+            client_name=client_name,
         )
 
         letter = EmailService.create_letter(
@@ -43,10 +33,12 @@ class AppointmentEmailService:
 
     @classmethod
     async def get_notification_letters(
-        cls, appointment: Appointment, images: list[UploadFile]
+        cls,
+        appointment: Appointment,
+        images: list[UploadFile],
     ) -> list[EmailMessage]:
-        letter_body = cls._render_template(
-            cls.notification_letter_template,
+        letter_body = cls.template_engine.render_template(
+            "new_appointment_notification.html",
             id=appointment.id,
             name=appointment.name,
             email=appointment.email,
