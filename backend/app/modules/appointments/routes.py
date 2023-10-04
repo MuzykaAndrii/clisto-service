@@ -11,6 +11,7 @@ from app.files.exceptions import (
     InvalidMimeTypeError,
     TooLargeFileError,
 )
+from app.modules.appointments.dal import AppointmentDAL
 from app.modules.appointments.forms import AppointmentForm
 from app.modules.appointments.services.email import AppointmentEmailService
 from app.modules.appointments.services.image import AppointmentImageService
@@ -59,6 +60,8 @@ async def make_appointment(
         raise HTTPException(413, detail="Uploaded image should be smaller than 5mb")
     except InvalidMimeTypeError:
         raise HTTPException(415, detail="Uploaded files should be images")
+
+    new_appointment = await AppointmentDAL.create(name=name, email=email, phone=phone)
 
     client_letter = AppointmentEmailService.get_client_confirmation_letter(name, email)
     SMTPService.send_emails(client_letter)
