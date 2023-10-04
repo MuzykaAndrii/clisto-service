@@ -13,7 +13,7 @@ class Appointment(Base):
     id: Mapped[int] = mc(primary_key=True)
     name: Mapped[str] = mc(String(50), nullable=False)
     email: Mapped[str] = mc(String(60), nullable=False)
-    phone: Mapped[str] = mc(String(15), nullable=False)
+    phone: Mapped[str] = mc(String(20), nullable=False)
     created_at: Mapped[datetime] = mc(default=datetime.utcnow)
 
     def __str__(self) -> str:
