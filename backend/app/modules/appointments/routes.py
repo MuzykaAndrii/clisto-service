@@ -22,6 +22,29 @@ async def make_appointment(
     phone: Annotated[str, AppointmentForm.phone_filed],
     images: list[UploadFile],
 ):
+    """
+    TODO:
+        1. Validate files size and type:
+
+            if len(files) > MAX_FILES_COUNT:
+                raise TooManyFilesError
+            if file.size > max_file_size:
+                raise TooLargeFileError
+            if file.type != expected_file_types:
+                raise WrongFileFormat
+
+        2. Send letters:
+            sended = letter_to_owner.send
+
+            if not sended:
+                fail_letter_to_client.send
+            else:
+                success_letter_to_client.send
+
+        3. Save appointment to database:
+            appointment.save
+
+    """
     letter = await EmailService.create_letter_with_files(
         recipient=email,
         subject="Test email with files",
