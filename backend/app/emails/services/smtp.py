@@ -12,13 +12,7 @@ class SMTPService:
     password: str = settings.SMTP_PASSWORD
 
     @classmethod
-    def send_email(cls, letter: EmailMessage) -> None | SMTPException:
-        with smtplib.SMTP_SSL(cls.host, cls.port) as smtp_server:
-            smtp_server.login(cls.user, cls.password)
-            smtp_server.send_message(letter)
-
-    @classmethod
-    def send_multiply_emails(cls, letters: list[EmailMessage]) -> None | SMTPException:
+    def send_emails(cls, letters: tuple[EmailMessage]) -> None | SMTPException:
         with smtplib.SMTP_SSL(cls.host, cls.port) as smtp_server:
             smtp_server.login(cls.user, cls.password)
 
