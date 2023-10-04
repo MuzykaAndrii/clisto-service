@@ -13,9 +13,9 @@ from app.files.exceptions import (
 )
 from app.modules.appointments.dal import AppointmentDAL
 from app.modules.appointments.forms import AppointmentForm
+from app.modules.appointments.models import Appointment
 from app.modules.appointments.services.email import AppointmentEmailService
 from app.modules.appointments.services.image import AppointmentImageService
-from app.template_engine.services import TemplateEngineService
 
 router = APIRouter(
     prefix="/appointments",
@@ -38,7 +38,9 @@ async def make_appointment(
     except InvalidMimeTypeError:
         raise HTTPException(415, detail="Uploaded files should be images")
 
-    new_appointment = await AppointmentDAL.create(name=name, email=email, phone=phone)
+    new_appointment: Appointment = await AppointmentDAL.create(
+        name=name, email=email, phone=phone
+    )
 
     client_letter = AppointmentEmailService.get_client_confirmation_letter(
         new_appointment.name,
