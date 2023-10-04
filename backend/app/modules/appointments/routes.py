@@ -2,6 +2,7 @@ from typing import Annotated
 
 from fastapi import (
     APIRouter,
+    BackgroundTasks,
     HTTPException,
     UploadFile,
 )
@@ -29,6 +30,7 @@ async def make_appointment(
     email: Annotated[str, AppointmentForm.email_filed],
     phone: Annotated[str, AppointmentForm.phone_filed],
     images: list[UploadFile],
+    bg_tasks: BackgroundTasks,
 ):
     try:
         for image in images:
@@ -51,6 +53,12 @@ async def make_appointment(
         appointment=new_appointment,
         images=images,
     )
-    SMTPService.send_emails(client_letter, *notification_letters)
+
+    letters_to_send = [client_letter, *notification_letters]
+
+    bg_tasks.add_task(
+        SMTPService.send_emails,
+        *letters_to_send,
+    )
 
     return {"status": "success"}
