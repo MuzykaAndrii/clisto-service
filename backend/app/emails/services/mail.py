@@ -30,6 +30,7 @@ class EmailService:
             subtype=mime_helper.mime_subtype,
             filename=file.filename,
         )
+        await file.close()
         return letter
 
     @classmethod
