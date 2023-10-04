@@ -6,15 +6,15 @@ from fastapi import (
     UploadFile,
 )
 
-from app.emails.services.mail import EmailService
 from app.emails.services.smtp import SMTPService
 from app.files.exceptions import (
-    FileValidationError,
     InvalidMimeTypeError,
     TooLargeFileError,
 )
 from app.modules.appointments.forms import AppointmentForm
+from app.modules.appointments.services.email import AppointmentEmailService
 from app.modules.appointments.services.image import AppointmentImageService
+from app.template_engine.services import TemplateEngineService
 
 router = APIRouter(
     prefix="/appointments",
@@ -60,12 +60,7 @@ async def make_appointment(
     except InvalidMimeTypeError:
         raise HTTPException(415, detail="Uploaded files should be images")
 
-    letter = await EmailService.create_letter_with_files(
-        recipient=email,
-        subject="Test email with files",
-        content=f"Mock content from {name} {phone}",
-        files=images,
-    )
-    SMTPService.send_email(letter)
+    client_letter = AppointmentEmailService.get_client_confirmation_letter(name, email)
+    SMTPService.send_emails(client_letter)
 
     return {"status": "success"}

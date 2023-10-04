@@ -42,5 +42,5 @@ class FileService:
         if self.file_size > self.max_file_size:
             raise TooLargeFileError
 
-        if self.mime_type != self.expected_file_type:
+        if self.mime_type != self.expected_file_type.value:
             raise InvalidMimeTypeError

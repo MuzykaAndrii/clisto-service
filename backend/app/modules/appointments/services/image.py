@@ -5,5 +5,5 @@ from app.files.services import (
 
 
 class AppointmentImageService(FileService):
-    max_file_size: int = 5 * 1024 * 1024
+    max_file_size: int = 10 * 1024 * 1024
     expected_file_type: MimeTypes = MimeTypes.image
