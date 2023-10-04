@@ -1,11 +1,6 @@
 from contextlib import asynccontextmanager
-from typing import Annotated
 
-from fastapi import (
-    FastAPI,
-    Form,
-    UploadFile,
-)
+from fastapi import FastAPI
 from fastapi.middleware import Middleware
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -20,6 +15,7 @@ from app.config import (
     settings,
 )
 from app.db.session import engine
+from app.modules.appointments.admin.views import AppointmentAdminView
 from app.modules.appointments.routes import router as appointments_router
 from app.modules.auto_maintenance.admin.views import (
     CategoryAdminView,
@@ -80,6 +76,7 @@ admin.add_view(
     )
 )
 admin.add_view(UserAdminView())
+admin.add_view(AppointmentAdminView())
 
 admin.mount_to(app)
 
