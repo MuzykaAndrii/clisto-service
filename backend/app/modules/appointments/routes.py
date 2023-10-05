@@ -33,6 +33,7 @@ async def make_appointment(
     bg_tasks: BackgroundTasks,
 ):
     try:
+        # TODO: check validation_alias in UploadFile source
         for image in images:
             AppointmentImageService(image).validate()
     except TooLargeFileError:
