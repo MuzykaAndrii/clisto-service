@@ -131,7 +131,11 @@
                       {% for service_option in subcat.service_options %}
                       <div class="subcat-item">
                         <div class="subcat-icon-container">
-                          <i class="fa-solid fa-brush fa-xl"></i>
+                          {% if service_option.icon %}
+                            <img src="/media/{{ service_option.icon.path }}" alt="" width="20" height="20">
+                          {% else %}
+                            <i class="fa-solid fa-wrench fa-xl"></i>
+                          {% endif %}
                         </div>
                         <span class="subcat-header">{{ service_option.name }}</span>
                       </div>

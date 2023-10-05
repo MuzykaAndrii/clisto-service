@@ -1,9 +1,19 @@
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import (
+    FastAPI,
+    HTTPException,
+)
 from fastapi.middleware import Middleware
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import (
+    FileResponse,
+    RedirectResponse,
+    StreamingResponse,
+)
 from fastapi.staticfiles import StaticFiles
+from libcloud.storage.types import ObjectDoesNotExistError
+from sqlalchemy_file.storage import StorageManager
 from starlette.middleware.sessions import SessionMiddleware
 from starlette_admin import DropDown
 from starlette_admin.contrib.sqla import Admin
@@ -22,16 +32,20 @@ from app.modules.auto_maintenance.admin.views import (
     ServiceOptionAdminView,
     SubCategoryAdminView,
 )
+from app.modules.auto_maintenance.dal import ServiceOptionDAL
 from app.modules.auto_maintenance.routes import router as maintenance_router
 from app.modules.pages.routes import router as pages_router
 from app.modules.users.admin.views import UserAdminView
 from app.modules.users.services.user import UserService
+from app.storage.services import MediaStorageService
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # on startup
     await UserService.ensure_admin_exists()
+
+    MediaStorageService.init_storage("services_icons", "services-icons")
 
     yield
     # on shutdown
@@ -87,3 +101,24 @@ app.mount("/static", StaticFiles(directory=BASE_DIR / "app/static"), name="stati
 app.include_router(maintenance_router)
 app.include_router(pages_router)
 app.include_router(appointments_router)
+
+
+@app.get("/media/{storage}/{file_id}")
+async def get_media(storage: str, file_id: str):
+    try:
+        file = StorageManager.get_file(f"{storage}/{file_id}")
+        if file.object.driver.name == "Local Storage":
+            return FileResponse(
+                file.get_cdn_url(), media_type=file.content_type, filename=file.filename
+            )
+
+        if file.get_cdn_url() is not None:
+            return RedirectResponse(file.get_cdn_url())
+
+        return StreamingResponse(
+            file.object.as_stream(),
+            media_type=file.content_type,
+            headers={"Content-Disposition": f"attachment;filename={file.filename}"},
+        )
+    except ObjectDoesNotExistError:
+        return HTTPException(404)
