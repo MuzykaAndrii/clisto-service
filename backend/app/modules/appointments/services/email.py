@@ -46,6 +46,7 @@ class AppointmentEmailService:
 
         letters: list = []
 
+        # TODO: send letters to all admin users
         for recipient in settings.APPOINTMENTS_RECEIVERS:
             letter = await EmailService.create_letter_with_files(
                 recipient=recipient,
