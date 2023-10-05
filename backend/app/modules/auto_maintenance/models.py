@@ -19,7 +19,10 @@ class Category(Base):
     name = Column(String(length=50), nullable=False)
 
     subcategories = relationship(
-        "Subcategory", back_populates="category", cascade="all, delete-orphan"
+        "Subcategory",
+        back_populates="category",
+        cascade="all, delete-orphan",
+        lazy="joined",
     )
 
     def __str__(self) -> str:
@@ -39,8 +42,10 @@ class Subcategory(Base):
     name = Column(String(length=50), nullable=False)
     category_id = Column(ForeignKey("maintenance_categories.id"), nullable=False)
 
-    category = relationship("Category", back_populates="subcategories")
-    service_options = relationship("ServiceOption", back_populates="subcategory")
+    category = relationship("Category", back_populates="subcategories", lazy="selectin")
+    service_options = relationship(
+        "ServiceOption", back_populates="subcategory", lazy="joined"
+    )
 
     def __str__(self) -> str:
         return f"Subcategory: {self.name}"
@@ -65,7 +70,9 @@ class ServiceOption(Base):
         )
     )
 
-    subcategory = relationship(Subcategory, back_populates="service_options")
+    subcategory = relationship(
+        Subcategory, back_populates="service_options", lazy="selectin"
+    )
 
     def __str__(self) -> str:
         return f"Service option: {self.name}"
