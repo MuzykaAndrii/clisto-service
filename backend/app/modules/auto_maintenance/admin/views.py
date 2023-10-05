@@ -1,5 +1,10 @@
-from starlette_admin.contrib.sqla import ModelView
+from starlette_admin.contrib.sqla.ext.pydantic import ModelView
 
+from app.modules.auto_maintenance.admin.schemas import (
+    CategoryAdminSchema,
+    ServiceOptionAdminSchema,
+    SubCategoryAdminSchema,
+)
 from app.modules.auto_maintenance.models import (
     Category,
     ServiceOption,
@@ -10,13 +15,12 @@ from app.modules.auto_maintenance.models import (
 class CategoryAdminView(ModelView):
     def __init__(self, *args, **kwargs):
         model = Category
+        pydantic_model = CategoryAdminSchema
         icon = "fa-regular fa-folder"
         name = "Category"
         label = "Categories"
-        identity = None
-        converter = None
 
-        super().__init__(model, icon, name, label, identity, converter)
+        super().__init__(model, pydantic_model, icon, name, label)
 
     fields = [
         Category.id,
@@ -28,13 +32,12 @@ class CategoryAdminView(ModelView):
 class SubCategoryAdminView(ModelView):
     def __init__(self, *args, **kwargs):
         model = Subcategory
+        pydantic_model = SubCategoryAdminSchema
         icon = "fa-regular fa-folder-open"
         name = "Subcategory"
         label = "Subcategories"
-        identity = None
-        converter = None
 
-        super().__init__(model, icon, name, label, identity, converter)
+        super().__init__(model, pydantic_model, icon, name, label)
 
     fields = [
         Subcategory.id,
@@ -47,13 +50,12 @@ class SubCategoryAdminView(ModelView):
 class ServiceOptionAdminView(ModelView):
     def __init__(self, *args, **kwargs):
         model = ServiceOption
+        pydantic_model = ServiceOptionAdminSchema
         icon = "fa-solid fa-wrench"
         name = "Service"
         label = "Services"
-        identity = None
-        converter = None
 
-        super().__init__(model, icon, name, label, identity, converter)
+        super().__init__(model, pydantic_model, icon, name, label)
 
     fields = [
         ServiceOption.id,
