@@ -60,9 +60,7 @@ class ServiceOption(Base):
     subcategory_id = Column(ForeignKey("maintenance_subcategories.id"), nullable=False)
     icon = Column(
         ImageField(
-            image_validator=ImageValidator(
-                allowed_content_types=["image/svg+xml", "image/png"]
-            ),
+            image_validator=ImageValidator(allowed_content_types=["image/png"]),
             upload_storage="services-icons",
         )
     )
