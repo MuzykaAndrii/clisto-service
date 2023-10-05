@@ -79,6 +79,7 @@ admin = Admin(
     debug=settings.DEBUG,
     auth_provider=AdminAuthProvider(),
     middlewares=[Middleware(SessionMiddleware, secret_key=settings.JWT_SECRET)],
+    templates_dir=BASE_DIR / "app/templates/admin",
 )
 
 admin.add_view(Link(label="Home Page", icon="fa-solid fa-house", url="/pages/main"))
