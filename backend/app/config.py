@@ -8,6 +8,7 @@ from pydantic_settings import (
 )
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+MEDIA_DIR = BASE_DIR / "app/media"
 
 env_file_path = BASE_DIR / ".env"
 

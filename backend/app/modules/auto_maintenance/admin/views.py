@@ -59,4 +59,5 @@ class ServiceOptionAdminView(ModelView):
         ServiceOption.id,
         ServiceOption.name,
         ServiceOption.subcategory,
+        ServiceOption.icon,
     ]

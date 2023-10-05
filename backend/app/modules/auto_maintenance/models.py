@@ -6,6 +6,8 @@ from sqlalchemy import (
     String,
 )
 from sqlalchemy.orm import relationship
+from sqlalchemy_file import ImageField
+from sqlalchemy_file.validators import ImageValidator
 
 from app.db.base import Base
 
@@ -56,7 +58,14 @@ class ServiceOption(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(length=50), nullable=False)
     subcategory_id = Column(ForeignKey("maintenance_subcategories.id"), nullable=False)
-    # TODO: add field to store icon
+    icon = Column(
+        ImageField(
+            image_validator=ImageValidator(
+                allowed_content_types=["image/svg+xml", "image/png"]
+            ),
+            upload_storage="services-icons",
+        )
+    )
 
     subcategory = relationship(Subcategory, back_populates="service_options")
 
