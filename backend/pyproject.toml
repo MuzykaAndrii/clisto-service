@@ -16,6 +16,7 @@ bcrypt = "^4.0.1"
 python-jose = "^3.3.0"
 sqlalchemy-file = "^0.5.0"
 pillow = "^10.0.1"
+fasteners = "^0.19"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
