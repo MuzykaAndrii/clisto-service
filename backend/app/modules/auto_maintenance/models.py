@@ -44,7 +44,10 @@ class Subcategory(Base):
 
     category = relationship("Category", back_populates="subcategories", lazy="selectin")
     service_options = relationship(
-        "ServiceOption", back_populates="subcategory", lazy="joined"
+        "ServiceOption",
+        back_populates="subcategory",
+        lazy="joined",
+        cascade="all, delete-orphan",
     )
 
     def __str__(self) -> str:
