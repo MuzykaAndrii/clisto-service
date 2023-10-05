@@ -1,3 +1,4 @@
+from fastapi import Request
 from starlette_admin.contrib.sqla import ModelView
 
 from app.modules.appointments.models import Appointment
@@ -21,3 +22,9 @@ class AppointmentAdminView(ModelView):
         Appointment.phone,
         Appointment.created_at,
     ]
+
+    def can_create(self, request: Request) -> bool:
+        return False
+
+    def can_edit(self, request: Request) -> bool:
+        return False
