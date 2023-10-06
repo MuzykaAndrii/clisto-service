@@ -253,6 +253,11 @@
   <script src="{{ url_for('static', path='js/vendor/hammer-2.0.8.js') }}"></script>
   <script src="{{ url_for('static', path='js/functions.js') }}"></script>
   <script src="{{ url_for('static', path='js/categories-toggler.js') }}"></script>
+  {% if errors %}
+    <script>
+      moveToAppointment()
+    </script>
+  {% endif %}
 </body>
 
 </html>
