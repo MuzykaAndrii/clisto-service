@@ -132,7 +132,7 @@
                       <div class="subcat-item">
                         <div class="subcat-icon-container">
                           {% if service_option.icon %}
-                            <img src="/media/{{ service_option.icon.path }}" alt="" width="20" height="20">
+                            <img src="/media/{{ service_option.icon.path }}" alt="" width="23" height="23">
                           {% else %}
                             <i class="fa-solid fa-wrench fa-xl"></i>
                           {% endif %}
@@ -247,17 +247,7 @@
       <li>Make Appointment</li>
     </ul>
   </div>
-  <script>
-    window.addEventListener('DOMContentLoaded', function() {
-        var liElements = document.querySelectorAll('.side-nav li');
-        liElements.forEach(function(li, index) {
-            var position = (index + 1).toString().padStart(2, '0');
-
-            li.setAttribute('data-before', position);
-            console.log(li);
-        });
-    });
-  </script>
+  <script src="{{ url_for('static', path='js/set-navs-nums.js') }}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
   <script src="{{ url_for('static', path='js/vendor/hammer-2.0.8.js') }}"></script>
