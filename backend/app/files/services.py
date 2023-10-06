@@ -1,4 +1,3 @@
-import mimetypes
 from enum import Enum
 
 from fastapi import UploadFile
@@ -7,6 +6,7 @@ from app.files.exceptions import (
     FileValidationError,
     InvalidMimeTypeError,
     TooLargeFileError,
+    TooManyFilesError,
 )
 
 
@@ -19,28 +19,37 @@ class MimeTypes(Enum):
 
 
 class FileService:
+    # TODO: move validation logic to pydantic schema
     max_file_size: int
     expected_file_type: MimeTypes
+    max_files_count: int
 
-    def __init__(self, file: UploadFile) -> None:
-        self.file = file
-        self._mime_type, self._mime_subtype = file.content_type.split("/")
+    @staticmethod
+    def get_file_mime_type(file: UploadFile):
+        mime_type, _ = file.content_type.split("/")
+        return mime_type
 
-    @property
-    def mime_type(self):
-        return self._mime_type
+    @staticmethod
+    def get_file_mime_subtype(file: UploadFile):
+        _, mime_subtype = file.content_type.split("/")
+        return mime_subtype
 
-    @property
-    def mime_subtype(self):
-        return self._mime_subtype
+    @staticmethod
+    def get_file_size(file: UploadFile):
+        return file.file.size
 
-    @property
-    def file_size(self):
-        return self.file.size
-
-    def validate(self) -> None | FileValidationError:
-        if self.file_size > self.max_file_size:
+    @classmethod
+    def validate_one(cls, file: UploadFile) -> None | FileValidationError:
+        if cls.get_file_size(file) > cls.max_file_size:
             raise TooLargeFileError
 
-        if self.mime_type != self.expected_file_type.value:
+        if cls.expected_file_type != cls.expected_file_type.value:
             raise InvalidMimeTypeError
+
+    @classmethod
+    def validate_bulk(cls, *files: tuple[UploadFile]) -> None | FileValidationError:
+        if len(files) > cls.max_files_count:
+            raise TooManyFilesError
+
+        for file in files:
+            cls.validate_one(file)

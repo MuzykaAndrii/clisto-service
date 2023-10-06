@@ -11,12 +11,10 @@ from app.emails.services.smtp import SMTPService
 from app.files.exceptions import (
     InvalidMimeTypeError,
     TooLargeFileError,
+    TooManyFilesError,
 )
-from app.modules.appointments.dal import AppointmentDAL
 from app.modules.appointments.forms import AppointmentForm
-from app.modules.appointments.models import Appointment
-from app.modules.appointments.services.email import AppointmentEmailService
-from app.modules.appointments.services.image import AppointmentImageService
+from app.modules.appointments.services.appointment import AppointmentService
 
 router = APIRouter(
     prefix="/appointments",
@@ -33,35 +31,17 @@ async def make_appointment(
     bg_tasks: BackgroundTasks,
 ):
     try:
-        # TODO: check validation_alias in UploadFile source
-        for image in images:
-            AppointmentImageService(image).validate()
+        letters = AppointmentService.make_appointment(name, email, phone, images)
     except TooLargeFileError:
         raise HTTPException(413, detail="Uploaded image should be smaller than 10mb")
     except InvalidMimeTypeError:
         raise HTTPException(415, detail="Uploaded files should be images")
-
-    new_appointment: Appointment = await AppointmentDAL.create(
-        name=name,
-        email=email,
-        phone=phone,
-    )
-
-    client_letter = AppointmentEmailService.get_client_confirmation_letter(
-        new_appointment.name,
-        new_appointment.email,
-    )
-
-    notification_letters = await AppointmentEmailService.get_notification_letters(
-        appointment=new_appointment,
-        images=images,
-    )
-
-    letters_to_send = [client_letter, *notification_letters]
+    except TooManyFilesError:
+        raise HTTPException(413, detail="Too many files uploaded, expected up to 10")
 
     bg_tasks.add_task(
         SMTPService.send_emails,
-        *letters_to_send,
+        *letters,
     )
 
     return {"status": "success"}
