@@ -209,23 +209,47 @@
                 <h2>You want us to do</h2>
                 <form class="work-request">
                   <div class="work-request--information">
+
                     <div class="information-name">
                       <input id="name" type="text" spellcheck="false">
                       <label for="name">Name</label>
+                      {% if errors.name %}
+                      {% for name_error in errors.name %}
+                      <span class="error-msg">{{ name_error }}</span>
+                      {% endfor %}
+                      {% endif %}
                     </div>
+
                     <div class="information-email">
                       <input id="email" type="email" spellcheck="false">
                       <label for="email">Email</label>
+                      {% if errors.email %}
+                      {% for email_error in errors.email %}
+                      <span class="error-msg">{{ email_error }}</span>
+                      {% endfor %}
+                      {% endif %}
                     </div>
+
                     <div class="information-phone">
                       <input id="phone" type="phone" spellcheck="false">
                       <label for="phone">Phone</label>
+                      {% if errors.phone %}
+                      {% for phone_error in errors.phone %}
+                      <span class="error-msg">{{ phone_error }}</span>
+                      {% endfor %}
+                      {% endif %}
                     </div>
+
                     <div class="information-photos">
                       <div>Car photos</div>
                       <input id="photos" type="file" spellcheck="false" multiple>
-                      <!-- <label for="photos">Car photo</label> -->
+                      {% if errors.photos %}
+                      {% for photos_error in errors.photos %}
+                      <span class="error-msg">{{ photos_error }}</span>
+                      {% endfor %}
+                      {% endif %}
                     </div>
+
                   </div>
                   <input type="submit" value="Send Request">
                 </form>

@@ -1633,6 +1633,13 @@ body {
     opacity: 1
 }
 
+.error-msg {
+    color: red;
+    font-size: 12px;
+    font-weight: 100;
+    display: block;
+}
+
 @media (max-width: 767px) {
     .outer-nav>li {
         font-size: 44px

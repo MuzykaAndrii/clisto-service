@@ -26,5 +26,6 @@ async def get_main_page(
         context={
             "request": request,
             "categories": categories.all(),
+            "errors": None,
         },
     )
