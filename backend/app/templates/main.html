@@ -207,11 +207,11 @@
             <li class="l-section section">
               <div class="hire">
                 <h2>You want us to do</h2>
-                <form class="work-request">
+                <form class="work-request" method="POST" action="{{url_for('make_appointment')}}" enctype='multipart/form-data'>
                   <div class="work-request--information">
 
                     <div class="information-name">
-                      <input id="name" type="text" spellcheck="false">
+                      <input name="name" id="name" type="text" spellcheck="false">
                       <label for="name">Name</label>
                       {% if errors.name %}
                       {% for name_error in errors.name %}
@@ -221,7 +221,7 @@
                     </div>
 
                     <div class="information-email">
-                      <input id="email" type="email" spellcheck="false">
+                      <input name="email" id="email" type="email" spellcheck="false">
                       <label for="email">Email</label>
                       {% if errors.email %}
                       {% for email_error in errors.email %}
@@ -231,7 +231,7 @@
                     </div>
 
                     <div class="information-phone">
-                      <input id="phone" type="phone" spellcheck="false">
+                      <input name="phone" id="phone" type="phone" spellcheck="false">
                       <label for="phone">Phone</label>
                       {% if errors.phone %}
                       {% for phone_error in errors.phone %}
@@ -242,7 +242,7 @@
 
                     <div class="information-photos">
                       <div>Car photos</div>
-                      <input id="photos" type="file" spellcheck="false" multiple>
+                      <input name="images" id="photos" type="file" spellcheck="false" multiple>
                       {% if errors.photos %}
                       {% for photos_error in errors.photos %}
                       <span class="error-msg">{{ photos_error }}</span>
@@ -280,6 +280,11 @@
   {% if errors %}
     <script>
       moveToAppointment()
+    </script>
+  {% endif %}
+  {% if success %}
+    <script>
+      alert("Appointment successfully sended, check you're email to see report")
     </script>
   {% endif %}
 </body>

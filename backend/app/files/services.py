@@ -36,14 +36,14 @@ class FileService:
 
     @staticmethod
     def get_file_size(file: UploadFile):
-        return file.file.size
+        return file.size
 
     @classmethod
     def validate_one(cls, file: UploadFile) -> None | FileValidationError:
         if cls.get_file_size(file) > cls.max_file_size:
             raise TooLargeFileError
 
-        if cls.expected_file_type != cls.expected_file_type.value:
+        if cls.get_file_mime_type(file) != cls.expected_file_type.value:
             raise InvalidMimeTypeError
 
     @classmethod
