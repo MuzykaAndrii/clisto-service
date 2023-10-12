@@ -1,5 +1,4 @@
 from starlette_admin.contrib.sqla.ext.pydantic import ModelView
-from starlette_admin.fields import ImageField
 
 from app.modules.auto_maintenance.admin.schemas import (
     CategoryAdminSchema,
@@ -61,9 +60,13 @@ class ServiceOptionAdminView(ModelView):
     fields = [
         ServiceOption.id,
         ServiceOption.name,
+        ServiceOption.description,
+        ServiceOption.video_url,
         ServiceOption.subcategory,
         ServiceOption.icon,
     ]
+
+    exclude_fields_from_list = [ServiceOption.description]
 
     edit_template = "custom_edit.html"
     list_template = "custom_list.html"

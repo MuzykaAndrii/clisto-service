@@ -1,13 +1,17 @@
 from typing import Any
 
 from pydantic import (
+    AnyUrl,
     BaseModel,
     Field,
+    field_validator,
 )
 
 
 class ServiceOptionAdminSchema(BaseModel):
     name: str = Field(max_length=50, min_length=4)
+    description: str | None = None
+    video_url: AnyUrl = None
     subcategory: Any
     icon: Any
 
