@@ -28,6 +28,18 @@
   <div class="perspective effect-rotate-left">
     <div class="container">
       <div class="outer-nav--return"></div>
+      <div class="overlay-container">
+        <div class="overlay-btn-container">
+          <button class="overlay-close-btn"><i class="fa-solid fa-xmark fa-xl"></i></button>
+        </div>
+        <div class="overlay-content-container">
+          <h2 class="overlay-title">Service name</h2>
+          <div class="overlay-video">
+            <iframe style="border: none;" width="90%" height="100%" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+          </div>
+          <p class="overlay-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde fugit provident facilis voluptate aspernatur quam numquam. Recusandae minus dolor dolore maxime necessitatibus cupiditate similique voluptatibus assumenda fugit beatae! Omnis, corporis.</p>
+        </div>
+      </div>
       <div id="viewport" class="l-viewport">
         <div class="l-wrapper">
           <header class="header">
@@ -277,6 +289,7 @@
   <script src="{{ url_for('static', path='js/vendor/hammer-2.0.8.js') }}"></script>
   <script src="{{ url_for('static', path='js/functions.js') }}"></script>
   <script src="{{ url_for('static', path='js/categories-toggler.js') }}"></script>
+  <script src="{{ url_for('static', path='js/overlay.js') }}"></script>
   {% if errors %}
     <script>
       moveToAppointment()
