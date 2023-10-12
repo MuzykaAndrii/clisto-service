@@ -23,5 +23,5 @@ RUN poetry install --no-interaction --no-root
 
 COPY . .
 
-CMD ["alembic", "upgrade", "head"]
+RUN ["alembic", "upgrade", "head"]
 CMD ["gunicorn", "app.main:app", "--workers", "1", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind=0.0.0.0:8000", "--reload"]
