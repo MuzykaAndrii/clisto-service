@@ -65,6 +65,8 @@ class ServiceOption(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(length=50), nullable=False)
+    description = Column(String(), nullable=True)
+    video_url = Column(String(length=100), nullable=True)
     subcategory_id = Column(ForeignKey("maintenance_subcategories.id"), nullable=False)
     icon = Column(
         ImageField(
