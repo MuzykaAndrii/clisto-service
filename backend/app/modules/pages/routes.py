@@ -51,7 +51,7 @@ async def get_main_page(
     )
 
 
-@router.post("/make_appointment")
+@router.post("/main")
 async def make_appointment(
     request: Request,
     name: Annotated[str, Form()],
