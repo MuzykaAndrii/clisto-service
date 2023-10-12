@@ -1,15 +1,10 @@
 from collections import defaultdict
-from typing import (
-    Annotated,
-    Optional,
-    Union,
-)
+from typing import Annotated
 
 from fastapi import (
     APIRouter,
     BackgroundTasks,
     Depends,
-    File,
     Form,
     Request,
     UploadFile,
