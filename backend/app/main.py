@@ -123,3 +123,8 @@ async def get_media(storage: str, file_id: str):
         )
     except ObjectDoesNotExistError:
         return HTTPException(404)
+
+
+@app.get("/")
+def pages_redirect():
+    return RedirectResponse(app.url_path_for("get_main_page"))
