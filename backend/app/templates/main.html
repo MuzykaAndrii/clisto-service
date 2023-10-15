@@ -9,6 +9,7 @@
   <meta name="description" content="HTML5 website template">
   <meta name="keywords" content="global, template, html, sass, jquery">
   <meta name="author" content="Bucky Maler">
+  <meta http-equiv="Permissions-Policy" content="ch-ua-form-factor=()">
   <link rel="stylesheet" href="{{ url_for('static', path='css/main.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='fontawesome/css/all.min.css') }}">
 </head>
@@ -35,7 +36,7 @@
         <div class="overlay-content-container">
           <h2 class="overlay-title">Service name</h2>
           <div class="overlay-video">
-            <iframe style="border: none;" width="90%" height="100%" src="https://www.youtube.com/embed/aIfYYuUgr7w"></iframe>
+            <iframe referrerpolicy="no-referrer-when-downgrade" style="border: none;" width="90%" height="100%" src="https://www.youtube.com/embed/aIfYYuUgr7w"></iframe>
           </div>
           <p class="overlay-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde fugit provident facilis voluptate aspernatur quam numquam. Recusandae minus dolor dolore maxime necessitatibus cupiditate similique voluptatibus assumenda fugit beatae! Omnis, corporis.</p>
         </div>
@@ -141,7 +142,7 @@
                     <div class="subcat-items {{ subcat.name }}" {% if loop.index == 1 %}style="display: flex;"{% endif %}>
                       
                       {% for service_option in subcat.service_options %}
-                      <div class="subcat-item">
+                      <div videoUrl="{{service_option.video_url}}" description="{{service_option.description}}" class="subcat-item">
                         <div class="subcat-icon-container">
                           {% if service_option.icon %}
                             <img src="/media/{{ service_option.icon.path }}" alt="" width="23" height="23">
