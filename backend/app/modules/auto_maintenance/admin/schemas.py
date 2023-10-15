@@ -1,7 +1,7 @@
 from typing import Any
 
 from pydantic import (
-    AnyUrl,
+    AnyHttpUrl,
     BaseModel,
     Field,
     field_validator,
@@ -11,9 +11,16 @@ from pydantic import (
 class ServiceOptionAdminSchema(BaseModel):
     name: str = Field(max_length=50, min_length=4)
     description: str | None = None
-    video_url: AnyUrl = None
+    video_url: AnyHttpUrl | None = None
     subcategory: Any
     icon: Any
+
+    @field_validator("video_url", mode="before")
+    @classmethod
+    def video_url_empty_to_none(cls, value):
+        if value == "":
+            return None
+        return value
 
 
 class SubCategoryAdminSchema(BaseModel):
