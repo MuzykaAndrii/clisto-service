@@ -26,6 +26,7 @@ repos:
     rev: ''
     hooks:
     - id: mypy
+      verbose: true
       args: [--strict, --ignore-missing-imports]
       additional_dependencies: [tokenize-rt==3.2.0]
         
