@@ -31,7 +31,10 @@ class JwtService:
 
     @staticmethod
     def _is_token_expired(payload: dict) -> bool:
-        expire_at = payload.get("exp")
+        expire_at: float | None = payload.get("exp")
+
+        if not expire_at:
+            return False
 
         if expire_at < datetime.utcnow().timestamp():
             return True
@@ -40,7 +43,7 @@ class JwtService:
     @classmethod
     def create_token(cls, data: str, expire: datetime | None = None) -> str:
         if not expire:
-            expire: datetime = cls._get_expire_time()
+            expire = cls._get_expire_time()
 
         token_data: dict = cls._get_token_pattern()
 
