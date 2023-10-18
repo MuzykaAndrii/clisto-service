@@ -57,8 +57,8 @@ class Settings(BaseSettings):
     BASE_ADMIN_EMAIL: str
     BASE_ADMIN_PASS: str
 
+    @computed_field  # type: ignore
     @property
-    @computed_field
     def database_url(self) -> str:
         return self.DB_URL_PATTERN.format(
             user=self.DB_USER,
@@ -68,8 +68,8 @@ class Settings(BaseSettings):
             name=self.DB_NAME,
         )
 
+    @computed_field  # type: ignore
     @property
-    @computed_field
     def test_database_url(self) -> str:
         return self.TEST_DB_URL_PATTERN.format(
             user=self.TEST_DB_USER,
