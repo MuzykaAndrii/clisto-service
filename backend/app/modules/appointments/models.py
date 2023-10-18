@@ -11,7 +11,6 @@ from app.db.base import Base
 class Appointment(Base):
     __tablename__ = "appointments_appointment"
 
-    id: Mapped[int] = mc(primary_key=True)
     name: Mapped[str] = mc(String(50), nullable=False)
     email: Mapped[str] = mc(String(60), nullable=False)
     phone: Mapped[str] = mc(String(20), nullable=False)

@@ -15,7 +15,6 @@ from app.db.base import Base
 class Category(Base):
     __tablename__ = "maintenance_categories"
 
-    id = Column(Integer, primary_key=True)
     name = Column(String(length=50), nullable=False)
 
     subcategories = relationship(
@@ -38,7 +37,6 @@ class Category(Base):
 class Subcategory(Base):
     __tablename__ = "maintenance_subcategories"
 
-    id = Column(Integer, primary_key=True)
     name = Column(String(length=50), nullable=False)
     category_id = Column(ForeignKey("maintenance_categories.id"), nullable=False)
 
@@ -63,7 +61,6 @@ class Subcategory(Base):
 class ServiceOption(Base):
     __tablename__ = "maintenance_services"
 
-    id = Column(Integer, primary_key=True)
     name = Column(String(length=50), nullable=False)
     description = Column(String(), nullable=True)
     video_url = Column(String(length=100), nullable=True)
