@@ -6,8 +6,12 @@ class PWDService:
 
     @classmethod
     def get_password_hash(cls, password: str) -> str:
-        return cls.pwd_context.hash(password)
+        password_hash: str = cls.pwd_context.hash(password)
+        return password_hash
 
     @classmethod
     def verify_password(cls, raw_password: str, hashed_password: str) -> bool:
-        return cls.pwd_context.verify(raw_password, hashed_password)
+        is_passwords_matches: bool = cls.pwd_context.verify(
+            raw_password, hashed_password
+        )
+        return is_passwords_matches
