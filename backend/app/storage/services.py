@@ -17,5 +17,7 @@ class StorageService:
 
 class MediaStorageService(StorageService):
     @classmethod
-    def init_storage(cls, container_name: str, storage_name: str) -> None:
+    def init_storage(
+        cls, container_name: str, storage_name: str, *args, **kwargs
+    ) -> None:
         super().init_storage(container_name, storage_name, MEDIA_DIR)
