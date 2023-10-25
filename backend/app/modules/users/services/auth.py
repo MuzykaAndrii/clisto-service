@@ -16,8 +16,11 @@ class AuthService:
         if not user:
             raise UserNotFoundError
 
+        raw_pass: str = user_in.password
+        hashed_pass: str = str(user.password_hash)
+
         pass_matching = PWDService.verify_password(
-            raw_password=user_in.password, hashed_password=user.password_hash
+            raw_password=raw_pass, hashed_password=hashed_pass
         )
 
         if not pass_matching:
