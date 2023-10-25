@@ -2,6 +2,10 @@ class FileValidationError(Exception):
     pass
 
 
+class InvalidFileNameError(FileValidationError):
+    pass
+
+
 class TooLargeFileError(FileValidationError):
     pass
 

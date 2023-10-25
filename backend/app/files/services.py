@@ -4,6 +4,7 @@ from fastapi import UploadFile
 
 from app.files.exceptions import (
     FileValidationError,
+    InvalidFileNameError,
     InvalidMimeTypeError,
     TooLargeFileError,
     TooManyFilesError,
@@ -26,11 +27,17 @@ class FileService:
 
     @staticmethod
     def get_file_mime_type(file: UploadFile):
+        if not file.content_type:
+            raise InvalidFileNameError
+
         mime_type, _ = file.content_type.split("/")
         return mime_type
 
     @staticmethod
     def get_file_mime_subtype(file: UploadFile):
+        if not file.content_type:
+            raise InvalidFileNameError
+
         _, mime_subtype = file.content_type.split("/")
         return mime_subtype
 
@@ -46,6 +53,8 @@ class FileService:
         if cls.get_file_mime_type(file) != cls.expected_file_type.value:
             raise InvalidMimeTypeError
 
+        return None
+
     @classmethod
     def validate_bulk(cls, *files: tuple[UploadFile]) -> None | FileValidationError:
         if len(files) > cls.max_files_count:
@@ -53,3 +62,5 @@ class FileService:
 
         for file in files:
             cls.validate_one(file)
+
+        return None
