@@ -56,7 +56,7 @@ class FileService:
         return None
 
     @classmethod
-    def validate_bulk(cls, *files: tuple[UploadFile]) -> None | FileValidationError:
+    def validate_bulk(cls, *files) -> None | FileValidationError:
         if len(files) > cls.max_files_count:
             raise TooManyFilesError
 
