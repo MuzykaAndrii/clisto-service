@@ -2,9 +2,10 @@ from fastapi import Request
 from sqlalchemy import (
     Column,
     ForeignKey,
-    Integer,
     String,
 )
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column as mc
 from sqlalchemy.orm import relationship
 from sqlalchemy_file import ImageField
 from sqlalchemy_file.validators import ImageValidator
@@ -15,10 +16,9 @@ from app.db.base import Base
 class Category(Base):
     __tablename__ = "maintenance_categories"
 
-    name = Column(String(length=50), nullable=False)
+    name: Mapped[str] = mc(String(length=50), nullable=False)
 
-    subcategories = relationship(
-        "Subcategory",
+    subcategories: Mapped[list["Subcategory"]] = relationship(
         back_populates="category",
         cascade="all, delete-orphan",
         lazy="joined",
@@ -37,12 +37,15 @@ class Category(Base):
 class Subcategory(Base):
     __tablename__ = "maintenance_subcategories"
 
-    name = Column(String(length=50), nullable=False)
-    category_id = Column(ForeignKey("maintenance_categories.id"), nullable=False)
+    name: Mapped[str] = mc(String(length=50), nullable=False)
+    category_id: Mapped[int] = mc(
+        ForeignKey("maintenance_categories.id"), nullable=False
+    )
 
-    category = relationship("Category", back_populates="subcategories", lazy="selectin")
-    service_options = relationship(
-        "ServiceOption",
+    category: Mapped[Category] = relationship(
+        back_populates="subcategories", lazy="selectin"
+    )
+    service_options: Mapped[list["ServiceOption"]] = relationship(
         back_populates="subcategory",
         lazy="joined",
         cascade="all, delete-orphan",
@@ -61,19 +64,21 @@ class Subcategory(Base):
 class ServiceOption(Base):
     __tablename__ = "maintenance_services"
 
-    name = Column(String(length=50), nullable=False)
-    description = Column(String(), nullable=True)
-    video_url = Column(String(length=100), nullable=True)
-    subcategory_id = Column(ForeignKey("maintenance_subcategories.id"), nullable=False)
+    name: Mapped[str] = mc(String(length=50), nullable=False)
+    description: Mapped[str] = mc(String(), nullable=True)
+    video_url: Mapped[str] = mc(String(length=100), nullable=True)
+    subcategory_id: Mapped[int] = mc(
+        ForeignKey("maintenance_subcategories.id"), nullable=False
+    )
     icon = Column(
         ImageField(
             image_validator=ImageValidator(allowed_content_types=["image/png"]),
             upload_storage="services-icons",
         )
-    )
+    )  # type: ignore
 
-    subcategory = relationship(
-        Subcategory, back_populates="service_options", lazy="selectin"
+    subcategory: Mapped[Subcategory] = relationship(
+        back_populates="service_options", lazy="selectin"
     )
 
     def __str__(self) -> str:
