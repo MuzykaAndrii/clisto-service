@@ -1,5 +1,6 @@
 from abc import ABC
 from typing import (
+    Any,
     Iterable,
     TypeVar,
 )
@@ -13,14 +14,14 @@ from sqlalchemy.exc import NoResultFound
 from app.db.base import Base
 from app.db.session import async_session_maker
 
-D = TypeVar("D", bound=Base)
+# D = TypeVar("D", bound=Base)
 
 
 class BaseDAL(ABC):
     model: type[Base]
 
     @classmethod
-    async def get_by_id(cls, id: int) -> D | None:
+    async def get_by_id(cls, id: int) -> Any | None:
         async with async_session_maker() as session:
             result = await session.get(cls.model, id)
 
@@ -40,7 +41,7 @@ class BaseDAL(ABC):
             return instance
 
     @classmethod
-    async def delete_by_id(cls, id: int) -> D | NoResultFound:
+    async def delete_by_id(cls, id: int) -> Any | NoResultFound:
         async with async_session_maker() as session:
             stmt = delete(cls.model).where(cls.model.id == id).returning(cls.model)
 
@@ -48,7 +49,7 @@ class BaseDAL(ABC):
             return deleted_instance.scalar_one()
 
     @classmethod
-    async def get_all(cls, offset: int = 0, limit: int = 50) -> Iterable[D] | None:
+    async def get_all(cls, offset: int = 0, limit: int = 50) -> Iterable[Any] | None:
         async with async_session_maker() as session:
             stmt = select(cls.model).offset(offset).limit(limit)
 
@@ -56,7 +57,7 @@ class BaseDAL(ABC):
             return instances.scalars().all()
 
     @classmethod
-    async def filter_by(cls, **filter_criteria) -> Iterable[D] | None:
+    async def filter_by(cls, **filter_criteria) -> Iterable[Any] | None:
         async with async_session_maker() as session:
             stmt = select(cls.model).filter_by(**filter_criteria)
 
