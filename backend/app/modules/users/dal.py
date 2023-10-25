@@ -32,5 +32,5 @@ class UserDAL(BaseDAL):
 
     @classmethod
     async def get_admin_users(cls) -> Iterable[User] | None:
-        admin_users = await cls.filter_by(is_superuser=True)
+        admin_users: Iterable[User] | None = await cls.filter_by(is_superuser=True)
         return admin_users

@@ -1,5 +1,6 @@
 from app.config import settings
 from app.jwt.exceptions import (
+    JwtError,
     JWTExpiredError,
     JwtNotValidError,
 )
@@ -7,6 +8,7 @@ from app.jwt.service import JwtService
 from app.modules.users.dal import UserDAL
 from app.modules.users.exceptions import (
     InvalidUserIdError,
+    UserLoginError,
     UserNotFoundError,
 )
 from app.modules.users.models import User
@@ -34,7 +36,7 @@ class UserService:
             await cls._create_base_admin_user()
 
     @staticmethod
-    async def get_user_from_token(token: str) -> User | None:
+    async def get_user_from_token(token: str) -> User:
         try:
             payload: dict = JwtService.read_token(token)
         except JwtNotValidError:
@@ -43,11 +45,11 @@ class UserService:
             raise JWTExpiredError
 
         try:
-            user_id = int(payload.get("sub"))
+            user_id: int = int(payload.get("sub", None))
         except ValueError:
             raise InvalidUserIdError
 
-        user: User = await UserDAL.get_by_id(user_id)
+        user: User | None = await UserDAL.get_by_id(user_id)
         if not user:
             raise UserNotFoundError
 
@@ -55,4 +57,4 @@ class UserService:
 
     @staticmethod
     def user_is_admin(user: User) -> bool:
-        return user.is_superuser
+        return bool(user.is_superuser)
