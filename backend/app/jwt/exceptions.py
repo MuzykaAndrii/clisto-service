@@ -1,10 +1,14 @@
-class JwtMissingError(Exception):
+class JwtError(Exception):
     pass
 
 
-class JwtNotValidError(Exception):
+class JwtMissingError(JwtError):
     pass
 
 
-class JWTExpiredError(Exception):
+class JwtNotValidError(JwtError):
+    pass
+
+
+class JWTExpiredError(JwtError):
     pass
