@@ -19,7 +19,7 @@ WORKDIR /backend
 
 COPY poetry.lock pyproject.toml /backend/
 RUN poetry config virtualenvs.create false
-RUN poetry install --no-interaction --no-root
+RUN poetry install --no-interaction --no-root --without dev
 
 COPY . .
 
