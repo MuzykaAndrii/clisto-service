@@ -44,3 +44,16 @@ profile = "black"
 line_length = 88
 force_grid_wrap = 2
 include_trailing_comma = true
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+explicit_package_bases = true
+follow_imports = "silent"
+exclude = [
+    "^tests/",
+]
+
+[[tool.mypy.overrides]]
+module = "app.modules.*.admin.views"
+disable_error_code = "list-item"

@@ -27,6 +27,5 @@ repos:
     hooks:
     - id: mypy
       verbose: true
-      args: [--ignore-missing-imports, --explicit-package-bases, --follow-imports=silent]
       additional_dependencies: [tokenize-rt==3.2.0]
         
