@@ -41,7 +41,7 @@ async def make_appointment(
 
     bg_tasks.add_task(
         SMTPService.send_emails,
-        *letters,
+        letters,
     )
 
     return {"status": "success"}
