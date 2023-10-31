@@ -16,7 +16,7 @@ class CategoryDAL(BaseDAL):
     model = Category
 
     @classmethod
-    async def get_all_with_related(cls):
+    async def get_all_with_related(cls) -> Iterable[Category]:
         async with async_session_maker() as session:
             stmt = select(Category).options(
                 selectinload(Category.subcategories).selectinload(

@@ -19,7 +19,7 @@ class AppointmentEmailService:
     ) -> EmailMessage:
         letter_body = cls.template_engine.render_template(
             "client_confirmation.html",
-            client_name=client_name,
+            client_name=client_name,  # type: ignore
         )
 
         letter = EmailService.create_letter(

@@ -13,7 +13,7 @@ router = APIRouter(
 
 
 @router.get("/categories", response_model=list[CategorySchema], status_code=200)
-async def get_categories():
+async def get_categories() -> Iterable[Category]:
     categories: Iterable[Category] = await CategoryDAL.get_all_with_related()
 
     return categories

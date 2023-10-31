@@ -1,3 +1,5 @@
+from typing import Any
+
 from starlette_admin.contrib.sqla.ext.pydantic import ModelView
 
 from app.modules.auto_maintenance.admin.schemas import (

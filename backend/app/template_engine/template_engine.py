@@ -21,7 +21,7 @@ class TemplateEngine:
 
         return engine
 
-    def render_template(self, template_name: str, **fields: Mapping):
+    def render_template(self, template_name: str, **fields) -> str:
         template = self._engine.get_template(template_name)
 
         content = template.render(**fields)

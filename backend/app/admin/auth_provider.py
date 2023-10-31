@@ -60,7 +60,10 @@ class AdminAuthProvider(AuthProvider):
         return response
 
     async def is_authenticated(self, request: Request) -> bool:
-        token: str = request.session.get(self.token_name)
+        token = request.session.get(self.token_name)
+
+        if not isinstance(token, str):
+            return False
 
         try:
             current_user = await UserService.get_user_from_token(token)
