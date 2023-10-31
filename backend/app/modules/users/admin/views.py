@@ -43,7 +43,7 @@ class UserAdminView(MyModelView):
 
     def on_before_create(self, request: Request, data: dict) -> dict:
         raw_password = data.get("password")
-        password_hash = PWDService.get_password_hash(raw_password)
+        password_hash = PWDService.get_password_hash(raw_password)  # type: ignore[arg-type]
 
         data.update({"password_hash": password_hash})
         data.pop("password", None)

@@ -1,5 +1,8 @@
 from collections import defaultdict
-from typing import Annotated
+from typing import (
+    Annotated,
+    Iterable,
+)
 
 from fastapi import (
     APIRouter,
@@ -62,8 +65,8 @@ async def make_appointment(
         CreateAppointmentSchema(name=name, email=email, phone=phone)
     except ValidationError as e:
         for error in e.errors():
-            for error_location in error.get("loc"):
-                errors[error_location].append(error.get("msg"))
+            for error_location in error.get("loc"):  # type: ignore[union-attr]
+                errors[error_location].append(error.get("msg"))  # type: ignore[index]
 
     try:
         letters = await AppointmentService.make_appointment(name, email, phone, images)
