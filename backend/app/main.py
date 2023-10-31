@@ -79,7 +79,7 @@ admin = Admin(
     debug=settings.DEBUG,
     auth_provider=AdminAuthProvider(),
     middlewares=[Middleware(SessionMiddleware, secret_key=settings.JWT_SECRET)],
-    templates_dir=BASE_DIR / "app/templates/admin",
+    templates_dir=str(BASE_DIR / "app/templates/admin"),
 )
 
 admin.add_view(Link(label="Home Page", icon="fa-solid fa-house", url="/pages/main"))
@@ -108,13 +108,15 @@ app.include_router(appointments_router)
 async def get_media(storage: str, file_id: str):
     try:
         file = StorageManager.get_file(f"{storage}/{file_id}")
+        file_cdn_url = str(file.get_cdn_url())
+
         if file.object.driver.name == "Local Storage":
             return FileResponse(
-                file.get_cdn_url(), media_type=file.content_type, filename=file.filename
+                file_cdn_url, media_type=file.content_type, filename=file.filename
             )
 
         if file.get_cdn_url() is not None:
-            return RedirectResponse(file.get_cdn_url())
+            return RedirectResponse(file_cdn_url)
 
         return StreamingResponse(
             file.object.as_stream(),
