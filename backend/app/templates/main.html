@@ -298,7 +298,12 @@
   {% endif %}
   {% if success %}
     <script>
-      alert("Appointment successfully sended, check you're email to see report")
+      alert("Appointment successfully sended, check you're email to see report");
+
+      let currentLocation = window.location.href;
+      let newURL = currentLocation.replace(/\/[^/]*$/, "/main");
+
+      window.location.href = newURL;
     </script>
   {% endif %}
 </body>
