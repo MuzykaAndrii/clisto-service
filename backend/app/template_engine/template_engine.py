@@ -1,5 +1,3 @@
-from typing import Mapping
-
 from jinja2 import (
     Environment,
     FileSystemLoader,

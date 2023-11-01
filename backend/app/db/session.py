@@ -15,7 +15,7 @@ else:
     engine = create_async_engine(settings.database_url)
 
 
-async_session_maker = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)  # type: ignore
+async_session_maker = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)  # type: ignore[call-overload]
 
 
 async def get_async_session() -> AsyncGenerator[AsyncSession, None]:

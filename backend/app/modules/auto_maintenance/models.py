@@ -75,7 +75,7 @@ class ServiceOption(Base):
             image_validator=ImageValidator(allowed_content_types=["image/png"]),
             upload_storage="services-icons",
         )
-    )  # type: ignore
+    )  # type: ignore[var-annotated]
 
     subcategory: Mapped[Subcategory] = relationship(
         back_populates="service_options", lazy="selectin"
